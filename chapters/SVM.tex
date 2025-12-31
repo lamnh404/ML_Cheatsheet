@@ -1,0 +1,72 @@
+\cheatbox{SVM - Tóm tắt}{\textStrech}{
+\subsubsection*{1. Bài toán Gốc (Primal)}
+
+\textbf{Input:} $X \in \mathbb{R}^{N \times (M-1)}$, $t \in \{-1,+1\}^N$. \textbf{Giả thiết:} Khả tách tuyến tính.
+
+\textbf{Khoảng cách:} $d_x = \frac{|w^T x + b|}{\|w\|}$. \textbf{Hàm quyết định:} $y(x) = w^T x + b$
+
+\textbf{Bài toán tối ưu:}
+$$w^*, b^* = \argmin_{w,b} \frac{1}{2}\|w\|^2 \quad \text{s.t: } t_n(w^T x_n + b) \geq 1, \forall n$$
+
+\textbf{Độ rộng lề:} $\delta = \frac{2}{\|w\|}$
+
+\textbf{CVXOPT format:} $\min_x \frac{1}{2}x^T K x + p^T x$ s.t: $Gx \leq h$
+
+$K = \text{diag}(1,\ldots,1,0)_{M \times M}$, $p = \mathbf{0}_{M \times 1}$, $h = -\mathbf{1}_{N \times 1}$
+
+$G_{N \times M}$: dòng thứ $n$ là $[-t_n x_{n,1}, \ldots, -t_n x_{n,M-1}, -t_n]$
+
+\subsubsection*{2. Bài toán Đối ngẫu (Dual)}
+
+\textbf{Lagrangian:} $L(w,b,\alpha) = \frac{1}{2}\|w\|^2 - \sum_{n=1}^N \alpha_n\{t_n(w^T x_n + b) - 1\}$
+
+\textbf{KKT:} (1) $\nabla_{w,b}L = 0$, (2) $t_n(w^T x_n + b) \geq 1$, (3) $\alpha_n \geq 0$, (4) $\alpha_n\{1-t_n(w^T x_n+b)\}=0$
+
+\textbf{Từ KKT-1:} $w = \sum_{n=1}^N \alpha_n t_n x_n$, $\sum_{n=1}^N \alpha_n t_n = 0$
+
+\textbf{Hàm đối ngẫu:} $g(\alpha) = -\frac{1}{2}\sum_{r,c} \alpha_c \alpha_r t_c t_r x_c^T x_r + \sum_n \alpha_n$
+
+\textbf{Bài toán đối ngẫu:}
+$$\alpha^* = \argmin_\alpha \frac{1}{2}\alpha^T K \alpha - \mathbf{1}^T \alpha$$
+$$\text{s.t: } \alpha_n \geq 0, \sum_n \alpha_n t_n = 0$$
+
+$K = K_{\text{Gram}} \odot T$ với $K_{\text{Gram}} = XX^T$, $T = tt^T$
+
+\textbf{Support vectors:} $\alpha_n > 0 \Rightarrow w^T x_n + b = 1$ (điểm là SV)
+
+\textbf{Dự báo:} $w = \sum_{s \in S} \alpha_s t_s x_s$, $b = \frac{1}{|S|}\sum_{m \in S}(t_m - \sum_{n \in S}\alpha_n t_n x_n^T x_m)$
+
+$y(x) = \sum_{n \in S}\alpha_n t_n x_n^T x + b$, label $= \text{sign}(y)$
+
+\subsubsection*{3. Kernel Method}
+
+\textbf{Động lực:} Phi tuyến hóa decision boundary bằng ánh xạ $\Phi(x)$
+
+\textbf{Kernel trick:} $k(x_i, x_j) = \langle \Phi(x_i), \Phi(x_j) \rangle$ (không cần tính $\Phi$ tường minh)
+
+\textbf{Điều kiện Mercer:} (1) $k(x_i,x_j) = k(x_j,x_i)$, (2) $\sum_i\sum_j c_i c_j k(x_i,x_j) \geq 0$
+
+\textbf{Kernel thông dụng:}
+\begin{itemize}[leftmargin=0.5cm, itemsep=0pt, topsep=0pt]
+    \item Linear: $k(x,x') = x^T x'$
+    \item Polynomial: $k(x,x') = (\gamma x^T x' + r)^d$
+    \item RBF: $k(x,x') = \exp(-\gamma\|x-x'\|^2)$
+    \item Sigmoid: $k(x,x') = \tanh(\gamma x^T x' + r)$
+\end{itemize}
+
+\textbf{Training với kernel:} $K_{\text{Gram}} = k(X_{\text{train}}, X_{\text{train}})$
+
+\textbf{Prediction:} $K_{BS} = k(X_{\text{test}}, X_S)$, $y = K_{BS}[a_S] + b$ với $a_S = \alpha_S \odot t_S$
+
+\textbf{So sánh:}
+\begin{tabular}{|l|c|c|}
+\hline
+& \textbf{Primal} & \textbf{Dual} \\
+\hline
+Số biến & $M$ & $N$ \\
+Số ràng buộc & $N$ & $N+1$ \\
+Dùng khi & $M \ll N$ & $M > N$ \\
+Kernel & Khó & Dễ \\
+\hline
+\end{tabular}
+}
