@@ -14,16 +14,23 @@
 
 % chú ý: không có khoảng trắng trong danh sách các gói
 % To be used for normal cheatbox content
-\newcommand{\textStrech}{1.4}
+\newcommand{\textStrech}{0.5}
 % To be used with environments (e.g. amsmath's align) that have spacing issues
 \newcommand{\mathStrech}{0.1}
 
 \DeclareMathOperator*{\argmin}{arg\,min}
 \DeclareMathOperator*{\argmax}{arg\,max}
+\setlength{\abovedisplayskip}{1pt}
+\setlength{\belowdisplayskip}{1pt}
+\linespread{0.95} % Nén dòng văn bản lại 5%
+\AtBeginDocument{
+  \setlength{\abovedisplayskip}{1pt}
+  \setlength{\belowdisplayskip}{1pt}
+}
 \begin{document}
 \graphicspath{{figures/}}
 
-\begin{cheatsheet}{MLCheatsheet}{1pt}
+\begin{cheatsheet}{MLCheatsheet}{0.5pt}
 \input{chapters/SVM.tex}
 \end{cheatsheet}
 

@@ -1,72 +1,196 @@
-\cheatbox{SVM - Tóm tắt}{\textStrech}{
-\subsubsection*{1. Bài toán Gốc (Primal)}
+% ======================================================================
+% PHẦN 1: BÀI TOÁN GỐC (PRIMAL) - LÝ THUYẾT & CODE
+% ======================================================================
 
-\textbf{Input:} $X \in \mathbb{R}^{N \times (M-1)}$, $t \in \{-1,+1\}^N$. \textbf{Giả thiết:} Khả tách tuyến tính.
-
-\textbf{Khoảng cách:} $d_x = \frac{|w^T x + b|}{\|w\|}$. \textbf{Hàm quyết định:} $y(x) = w^T x + b$
-
-\textbf{Bài toán tối ưu:}
-$$w^*, b^* = \argmin_{w,b} \frac{1}{2}\|w\|^2 \quad \text{s.t: } t_n(w^T x_n + b) \geq 1, \forall n$$
-
-\textbf{Độ rộng lề:} $\delta = \frac{2}{\|w\|}$
-
-\textbf{CVXOPT format:} $\min_x \frac{1}{2}x^T K x + p^T x$ s.t: $Gx \leq h$
-
-$K = \text{diag}(1,\ldots,1,0)_{M \times M}$, $p = \mathbf{0}_{M \times 1}$, $h = -\mathbf{1}_{N \times 1}$
-
-$G_{N \times M}$: dòng thứ $n$ là $[-t_n x_{n,1}, \ldots, -t_n x_{n,M-1}, -t_n]$
-
-\subsubsection*{2. Bài toán Đối ngẫu (Dual)}
-
-\textbf{Lagrangian:} $L(w,b,\alpha) = \frac{1}{2}\|w\|^2 - \sum_{n=1}^N \alpha_n\{t_n(w^T x_n + b) - 1\}$
-
-\textbf{KKT:} (1) $\nabla_{w,b}L = 0$, (2) $t_n(w^T x_n + b) \geq 1$, (3) $\alpha_n \geq 0$, (4) $\alpha_n\{1-t_n(w^T x_n+b)\}=0$
-
-\textbf{Từ KKT-1:} $w = \sum_{n=1}^N \alpha_n t_n x_n$, $\sum_{n=1}^N \alpha_n t_n = 0$
-
-\textbf{Hàm đối ngẫu:} $g(\alpha) = -\frac{1}{2}\sum_{r,c} \alpha_c \alpha_r t_c t_r x_c^T x_r + \sum_n \alpha_n$
-
-\textbf{Bài toán đối ngẫu:}
-$$\alpha^* = \argmin_\alpha \frac{1}{2}\alpha^T K \alpha - \mathbf{1}^T \alpha$$
-$$\text{s.t: } \alpha_n \geq 0, \sum_n \alpha_n t_n = 0$$
-
-$K = K_{\text{Gram}} \odot T$ với $K_{\text{Gram}} = XX^T$, $T = tt^T$
-
-\textbf{Support vectors:} $\alpha_n > 0 \Rightarrow w^T x_n + b = 1$ (điểm là SV)
-
-\textbf{Dự báo:} $w = \sum_{s \in S} \alpha_s t_s x_s$, $b = \frac{1}{|S|}\sum_{m \in S}(t_m - \sum_{n \in S}\alpha_n t_n x_n^T x_m)$
-
-$y(x) = \sum_{n \in S}\alpha_n t_n x_n^T x + b$, label $= \text{sign}(y)$
-
-\subsubsection*{3. Kernel Method}
-
-\textbf{Động lực:} Phi tuyến hóa decision boundary bằng ánh xạ $\Phi(x)$
-
-\textbf{Kernel trick:} $k(x_i, x_j) = \langle \Phi(x_i), \Phi(x_j) \rangle$ (không cần tính $\Phi$ tường minh)
-
-\textbf{Điều kiện Mercer:} (1) $k(x_i,x_j) = k(x_j,x_i)$, (2) $\sum_i\sum_j c_i c_j k(x_i,x_j) \geq 0$
-
-\textbf{Kernel thông dụng:}
-\begin{itemize}[leftmargin=0.5cm, itemsep=0pt, topsep=0pt]
-    \item Linear: $k(x,x') = x^T x'$
-    \item Polynomial: $k(x,x') = (\gamma x^T x' + r)^d$
-    \item RBF: $k(x,x') = \exp(-\gamma\|x-x'\|^2)$
-    \item Sigmoid: $k(x,x') = \tanh(\gamma x^T x' + r)$
+\cheatbox{1. Bài toán Gốc: Toán học (Theory)}{\textStrech}{
+\footnotesize
+\textbf{1. Thiết lập:}
+\begin{itemize}[leftmargin=*, nosep]
+    \item $x, w \in \mathbb{R}^{M-1}$; Siêu phẳng: $w^T x + b = 0$.
 \end{itemize}
 
-\textbf{Training với kernel:} $K_{\text{Gram}} = k(X_{\text{train}}, X_{\text{train}})$
+\textbf{2. Dẫn dắt:}
+Max Margin $\Leftrightarrow$ Min $\|w\|$ $\Leftrightarrow$ Min $\frac{1}{2}\|w\|^2$.
 
-\textbf{Prediction:} $K_{BS} = k(X_{\text{test}}, X_S)$, $y = K_{BS}[a_S] + b$ với $a_S = \alpha_S \odot t_S$
+\textbf{3. Công thức Primal:}
+\vspace{-0.2cm}
+$$ \boxed{\begin{aligned}
+& \min_{w,b} \frac{1}{2}\|w\|^2 \\
+& \text{s.t. } t_n(w^T x_n + b) \geq 1, \forall n
+\end{aligned}} $$
+\vspace{-0.4cm}
+}
 
-\textbf{So sánh:}
-\begin{tabular}{|l|c|c|}
-\hline
-& \textbf{Primal} & \textbf{Dual} \\
-\hline
-Số biến & $M$ & $N$ \\
-Số ràng buộc & $N$ & $N+1$ \\
-Dùng khi & $M \ll N$ & $M > N$ \\
-Kernel & Khó & Dễ \\
-\hline
-\end{tabular}
+\cheatbox{2. Bài toán Gốc: Implementation (CVXOPT)}{\textStrech}{
+\footnotesize
+Solver: $\min \frac{1}{2}u^T P u + q^T u$ s.t $Gu \leq h$.
+\textbf{Biến:} $u = \mathbf{[w; b]}_{(M \times 1)}$. \textbf{Mapping:}
+\vspace{-0.2cm}
+{\scriptsize
+$$ \boxed{\begin{aligned}
+P &= \mathbf{\text{diag}(1, \dots, 1, 0)}_{(M \times M)} \\
+q &= \mathbf{0}_{(M \times 1)} \\
+G &= - \mathbf{[ \text{diag}(t) \cdot X, \quad t ]}_{(N \times M)} \\
+h &= -\mathbf{1}_{(N \times 1)}
+\end{aligned}} $$
+}
+\vspace{-0.4cm}
+}
+
+% ======================================================================
+% PHẦN 2: CHUYỂN TIẾP (LAGRANGIAN & KKT)
+% ======================================================================
+
+\cheatbox{3. Lagrangian \& Điều kiện KKT}{\textStrech}{
+\footnotesize
+\textbf{1. Hàm Lagrangian:}
+$$ \mathcal{L} = \frac{1}{2}\|w\|^2 + \sum_{n=1}^N \underbrace{\alpha_n}_{\geq 0} \underbrace{\{1 - t_n(w^T x_n + b)\}}_{\substack{\text{đúng: }\leq 0 \\ \text{sai: }>0}} $$
+$$ = \frac{1}{2}\|w\|^2 + E_{\text{data}} \text{ (cost trên dữ liệu)} $$
+
+\textbf{Tính chất:} Với $\alpha_n \geq 0$, $(w^*,b^*)$ tối ưu:
+$$ \boxed{\mathcal{L}(w^*,b^*,\alpha) \leq \frac{1}{2}\|w^*\|^2} $$
+
+\textbf{2. Tính đạo hàm:}
+\vspace{-0.1cm}
+\begin{align*}
+\frac{\partial \mathcal{L}}{\partial w} &= w - \sum_{n=1}^N \alpha_n t_n x_n \\
+\frac{\partial \mathcal{L}}{\partial b} &= -\sum_{n=1}^N \alpha_n t_n
+\end{align*}
+
+\textbf{3. Điều kiện dừng (KKT-1):}
+\vspace{-0.1cm}
+\begin{itemize}[leftmargin=*, nosep]
+    \item $\nabla_w \mathcal{L} = 0 \Rightarrow \boxed{w = \sum_{n=1}^N \alpha_n t_n x_n}$ (1)
+    \item $\nabla_b \mathcal{L} = 0 \Rightarrow \boxed{\sum_{n=1}^N \alpha_n t_n = 0}$ (2)
+\end{itemize}
+
+\textbf{4. Các điều kiện KKT khác:}
+\begin{itemize}[leftmargin=*, nosep]
+    \item \textbf{(KKT-2)} Ràng buộc gốc: $1 - t_n(w^T x_n + b) \leq 0$
+    \item \textbf{(KKT-3)} Ràng buộc dual: $\alpha_n \geq 0, \; \forall n$
+    \item \textbf{(KKT-4)} Điều kiện bù: $\alpha_n\{1 - t_n(w^T x_n + b)\} = 0$
+\end{itemize}
+
+\textbf{Ý nghĩa:} Thỏa KKT $\Rightarrow$ $(w,b,\alpha) = (w^*,b^*,\alpha^*)$
+\vspace{-0.2cm}
+}
+
+% ======================================================================
+% PHẦN 3: BÀI TOÁN ĐỐI NGẪU (DUAL) - LÝ THUYẾT & CODE
+% ======================================================================
+
+\cheatbox{4. Bài toán Dual: Biến đổi (Math)}{\textStrech}{
+\footnotesize
+Thay (1), (2) vào $\mathcal{L}$:
+
+\textbf{A. Thay $w$ vào $\frac{1}{2}w^T w$:}
+\vspace{-0.2cm}
+{\scriptsize % Giảm cỡ chữ để không tràn
+$$ \frac{1}{2} \left(\sum \alpha_i t_i x_i\right)^T \left(\sum \alpha_j t_j x_j\right) = \frac{1}{2} \sum_{i,j} \alpha_i \alpha_j t_i t_j (x_i^T x_j) \; (*) $$
+}
+
+\textbf{B. Thay $w$ vào $-\sum \alpha_n t_n w^T x_n$:}
+\vspace{-0.2cm}
+{\scriptsize
+$$ - \sum_{n} \alpha_n t_n \underbrace{\left( \sum_{m} \alpha_m t_m x_m \right)^T}_{w^T} x_n = -2 \times (*) $$
+}
+
+\textbf{C. Kết quả ($A + B = -A$):}
+\vspace{-0.2cm}
+$$ \boxed{\begin{aligned}
+\max_{\alpha} \quad & \sum_{n} \alpha_n - \frac{1}{2} \sum_{i,j} \alpha_i \alpha_j t_i t_j (x_i^T x_j) \\
+\text{s.t.} \quad & \alpha_n \geq 0; \quad \sum \alpha_n t_n = 0
+\end{aligned}} $$
+\vspace{-0.4cm}
+}
+
+\cheatbox{5. Bài toán Dual: Implementation (CVXOPT)}{\textStrech}{
+\footnotesize
+Solver: $\min \frac{1}{2}\alpha^T P \alpha + q^T \alpha$ s.t $G\alpha \leq h, A\alpha = b$.
+\textbf{Biến:} $\alpha \in \mathbb{R}^N$. \textbf{Mapping:}
+\vspace{-0.2cm}
+{\scriptsize
+$$ \boxed{\begin{aligned}
+P &= \mathbf{K_{\text{Gram}}}_{(N \times N)} \quad (K_{ij} = t_i t_j x_i^T x_j) \\
+q &= -\mathbf{1}_{(N \times 1)} \quad (\text{Max } \Sigma \to \text{Min } -\Sigma) \\
+G &= -I_{(N \times N)} ; \ h = \mathbf{0}_{(N \times 1)} \\
+A &= t^T ; \ b = 0
+\end{aligned}} $$
+}
+\vspace{-0.4cm}
+}
+
+% ======================================================================
+% PHẦN 4: MỞ RỘNG
+% ======================================================================
+
+\cheatbox{6. Soft Margin \& Kernel}{\textStrech}{
+\footnotesize
+
+\textbf{1. Soft Margin (ý tưởng):}
+Cho phép một số điểm vi phạm margin bằng biến slack $\xi_n$,
+đổi lại bị phạt trong hàm mục tiêu.
+
+\vspace{0.05cm}
+\textbf{2. Bài toán gốc (Primal – soft margin):}
+\[
+\min_{w,b,\xi}\;
+\frac12\|w\|^2 + C\sum_{n=1}^N \xi_n
+\]
+\[
+\text{s.t. }\;
+t_n(w^T x_n + b) \ge 1 - \xi_n,\quad
+\xi_n \ge 0
+\]
+
+\textbf{Ý nghĩa $C$:}
+$C$ lớn $\Rightarrow$ phạt mạnh (ít sai, lề hẹp);
+$C$ nhỏ $\Rightarrow$ cho sai nhiều (lề rộng).
+
+\vspace{0.05cm}
+\textbf{3. Dạng đối ngẫu (Dual):}
+{\scriptsize
+\setlength{\jot}{1.5pt}
+\[
+\mathcal{L}
+= \frac12\|w\|^2
++ C\sum_n \xi_n
+- \sum_n \alpha_n\{t_n(w^T x_n + b) - 1 + \xi_n\}
+- \sum_n \mu_n \xi_n
+\]
+}
+
+\[
+\max_{\alpha}\;
+\sum_{n=1}^N \alpha_n
+-
+\frac12
+\sum_{i,j}
+\alpha_i \alpha_j t_i t_j\, x_i^T x_j
+\]
+\[
+\text{s.t. }\;
+\boxed{0 \le \alpha_n \le C},\quad
+\sum_{n=1}^N \alpha_n t_n = 0
+\]
+
+\textbf{Phân loại theo KKT:}
+\begin{itemize}[leftmargin=*, nosep]
+    \item $\alpha_n = 0$: điểm ngoài margin (không support)
+    \item $0 < \alpha_n < C$: support vector trên margin
+    \item $\alpha_n = C$: support vector vi phạm / phân loại sai
+\end{itemize}
+
+\vspace{0.05cm}
+\textbf{4. Kernel Trick:}
+Thay tích vô hướng:
+\[
+x_i^T x_j \;\longrightarrow\; k(x_i, x_j)
+\]
+\[
+f(x)
+= \sum_{n\in SV} \alpha_n t_n\, k(x_n,x) + b,
+\qquad
+y = \mathrm{sign}(f(x))
+\]
 }
