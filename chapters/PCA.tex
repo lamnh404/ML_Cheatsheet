@@ -1,0 +1,91 @@
+\cheatbox{1. Giới thiệu \& Mục tiêu (Introduction)}{\textStrech}{
+\footnotesize
+\textbf{1. Đầu vào:}
+\begin{itemize}[leftmargin=*, nosep]
+    \item Ma trận dữ liệu $X$ có kích thước ${N \times D}$ ($N$ mẫu, $D$ chiều). Thường $D$ rất lớn.
+    \item Độ phức tạp tính toán tăng lên: ma trận Kgram, kernel, hiệp phương sai, khoảng cách giữa các điểm dữ liệu, số nơron lớp ẩn tăng. Và cần mô hình phức tạp hơn, điểm dữ liệu lớn hơn dễ gây overfit.
+\end{itemize}
+
+\textbf{2. Mục tiêu:}
+\begin{itemize}[leftmargin=*, nosep]
+    \item Giảm số chiều $D \to M$ sao cho $M \ll D$.
+    \item Đặc trưng mới không tương quan (uncorrelated).
+    \item Giữ lại thông tin quan trọng nhất (Variance lớn nhất).
+\end{itemize}
+}
+
+\cheatbox{2. Kiến thức Toán nền tảng (Math Basis)}{\textStrech}{
+\footnotesize
+\textbf{1. Hình chiếu:}
+Chiếu vector $x$ lên vector $u$: $l = \frac{u^T x}{\|u\|}$.
+
+\textbf{2. Dạng bậc hai \& Đạo hàm:}
+\begin{itemize}[leftmargin=*, nosep]
+    \item $u = [u_1, u_2, \dots, u_N]^T$, $v = [v_1, v_2, \dots, v_M]^T$.
+    \item $A = [a_{ij}]_{N \times M}$.
+    \item $u^T A v = \sum_{i=1}^{N} \sum_{j=1}^{M} a_{ij} u_i^T v_j$. ($a{ij}$ và $u_i^T v_j$ là vô hướng).
+    \item $\frac{\partial u^T A u}{\partial u} = 2Au$ (với $A$ đối xứng).
+\end{itemize}
+
+\textbf{3. Eigenvectors \& Eigenvalues:}
+$$ Au = \lambda u \quad \Leftrightarrow \quad (A - \lambda I)u = 0 $$ (3.7) \\
+$$ => \det(A - \lambda I) = 0 $$ (3.8)
+Giải 3.8 để tìm $\lambda_i$ (có tối đa $N$ eigenvalues), thay vào 3.7 để tìm $u_i$.
+
+\textbf{4. Tính chất eigenvectors và eigenvalues $S$:}
+Vuông, đối xứng, bán định dương ($u^T S u \geq 0$).
+}
+
+\cheatbox{3. Cơ sở lý luận (Max Variance Theory)}{\textStrech}{
+\footnotesize
+\textbf{1. Bài toán tối ưu:}
+Tìm hướng $u$ để phương sai khi chiếu dữ liệu lên đó là lớn nhất.
+\vspace{-0.2cm}
+$$ \boxed{u_1 = \operatorname*{argmax}_{u} u^T S u \quad \text{s.t. } u^T u = 1} $$
+
+\textbf{2. Giải bằng Lagrangian:}
+$\mathcal{L}(u, \lambda) = u^T S u - \lambda(u^T u - 1)$.
+\vspace{-0.1cm}
+$$ \frac{\partial \mathcal{L}}{\partial u} = 0 \Rightarrow 2Su - 2\lambda u = 0 \Rightarrow Su = \lambda u $$
+
+\textbf{3. Kết luận:}
+Hướng $u$ tối ưu chính là \textbf{eigenvector} ứng với \textbf{eigenvalue} lớn nhất của ma trận $S$.
+}
+
+\cheatbox{4. Giải thuật PCA (Algorithm)}{\textStrech}{
+\footnotesize
+\textbf{1. Chuẩn hóa (Centering):}
+Tính vector trung bình $\mu = \frac{1}{N}\sum x_n$.
+\vspace{-0.2cm}
+$$ Z = X - \mu^T $$
+
+\textbf{2. Tính Covariance Matrix:}
+$$ S = \frac{1}{N} Z^T Z $$
+
+\textbf{3. Phân rã (Eigendecomposition):}
+Tìm $u_k, \lambda_k$ của $S$. Sắp xếp $\lambda_1 \geq \lambda_2 \dots$.
+Chọn $M$ vectors đầu $\rightarrow$ Ma trận $U_M$.
+
+\textbf{4. Phép chiếu (Rotation):}
+\vspace{-0.2cm}
+$$ \boxed{X_{pca} = Z U_M} $$
+
+\textbf{5. Phục hồi (Reconstruction):}
+$\hat{X} = X_{pca} U_M^T + \mu^T$ (Xấp xỉ).
+}
+\
+\cheatbox{5. Mối quan hệ với SVD}{\textStrech}{
+\footnotesize
+\textbf{1. Định nghĩa SVD:}
+Phân rã ma trận gốc $X$ (đã center):
+$$ X = U \Sigma V^T $$
+
+\textbf{2. Liên hệ PCA:}
+\begin{itemize}[leftmargin=*, nosep]
+    \item Eigenvectors của $S \approx X^T X$ chính là các cột của $V$.
+    \item Eigenvalues $\lambda_i = \frac{s_i^2}{N}$ ($s_i$ là singular values).
+\end{itemize}
+
+\textbf{3. Ưu điểm:}
+SVD ổn định hơn về mặt số học (numerical stability) so với việc tính trực tiếp $S$.
+}
