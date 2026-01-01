@@ -1,0 +1,87 @@
+\cheatbox{1. Giới thiệu về LDA}{\textStrech}{
+\footnotesize
+\textbf{1. Đầu vào:}
+\begin{itemize}[leftmargin=*, nosep]
+    \item X có kích thước $N \times D$, D rất lớn.
+    \item $t_k$ là nhãn lớp, có C lớp khác nhau.
+\end{itemize}
+
+\textbf{2. Mục tiêu:}
+\begin{itemize}[leftmargin=*, nosep]
+    \item Giảm số chiều từ D xuống M và $M \leq C - 1$.
+    \item Dữ liệu sau khi giảm có tính phân tách cao nhất.
+\end{itemize}
+}
+
+\cheatbox{2. LDA qua API (Scikit-learn)}{\textStrech}{
+\footnotesize
+\begin{enumerate}
+    \item from sklearn import datasets
+    \item from sklearn.discriminant\_analysis import LinearDiscriminantAnalysis
+    \item iris = datasets.load\_iris()
+    \item X = iris.data
+    \item y = iris.target
+    \item target\_names = iris.target\_names
+    \item lda = LinearDiscriminantAnalysis(n\_components=2)
+    \item X\_r2 = lda.fit(X, y).transform(X)
+\end{enumerate}
+}
+
+\cheatbox{3. Bài toán tối ưu}{\textStrech}{
+\footnotesize
+\textbf{1. Các thành phần:}
+\begin{itemize}[leftmargin=*, nosep]
+    \item Tâm của dữ liệu thuộc mỗi lớp: $m_1 = \frac{1}{N_1} \sum_{n \in C_1} x_n$, $m_2 = \frac{1}{N_2} \sum_{n \in C_2} x_n$
+    \item Khoảng cách giữa 2 tâm khi chiếu lên vector $w$: $d_{12} = w^T S_B w$
+    \item Between-class covariance matrix: $S_B = (m_2 - m_1)(m_1 - m_2)^T$
+    \item Variance của lớp 1 sau khi chiếu lên $w$: $\sigma_1^2 = w^T S_{W1} w$
+    \item Within-class covariance matrix: $S_{W1} = \sum_{n \in C_1} (x_n - m_1)(x_n - m_1)^T$
+    \item Within-class covariance matrix của cả 2 lớp: $S_W = S_{W1} + S_{W2}$
+    \item Within-class variance: $\sigma^2 = w^T S_W w$
+\end{itemize}
+
+\textbf{2. Hàm mục tiêu (Quan điểm của Fisher):}
+\\ Tìm hướng $w^* = \arg\max_w J(w)$ để cực đại hóa tỷ số:
+$$ \boxed{J(w) = \frac{w^T S_B w}{w^T S_W w}}$$
+
+\textbf{3. Tìm nghiệm:}
+\begin{itemize}[leftmargin=*, nosep]
+    \item Đạo hàm $\nabla_w J = 0 <=> S_B w = \lambda S_W w$, $\lambda = \frac{w^T S_B w}{w^T S_W w}$
+    \item => Phương trình eigenvector: $S_W^{-1} S_B w = \lambda w$
+    \item Chúng ta chỉ cần hướng của $w$, nên dùng $S_B w = (m_2 - m_1)(m_2 - m_1)^T w$
+    \item Hướng của vector $w$ là $S_W^{-1} (m_2 - m_1)$; Cần chuẩn hóa $w$ để có độ dài đơn vị.
+\end{itemize}
+}
+
+\cheatbox{4. Trường hợp có C lớp}{\textStrech}{
+\footnotesize
+====== Phần này chưa làm xong ====== \\
+\textbf{1. Thiết lập tham số:}
+\begin{itemize}[leftmargin=*, nosep]
+    \item Số lớp: $C$ ($C > 2$).
+    \item Vector trung bình lớp $k$: $m_k$.
+    \item Vector trung bình toàn cục: $m = \frac{1}{N} \sum_{k=1}^C N_k m_k$.
+\end{itemize}
+
+\textbf{2. Xây dựng các Ma trận Scatter:}
+\begin{itemize}[leftmargin=*, nosep]
+    \item \textbf{Within-class ($S_W$):} Tổng độ phân tán trong từng lớp.
+    $$ S_W = \sum_{k=1}^{C} S_k $$
+    (với $S_k$ là ma trận scatter của lớp $k$).
+
+    \item \textbf{Between-class ($S_B$):} Độ phân tán của các tâm lớp so với tâm chung.
+    $$ S_B = \sum_{k=1}^{C} N_k (m_k - m)(m_k - m)^T $$
+\end{itemize}
+
+\textbf{3. Hàm mục tiêu (Objective Function):}
+Tìm ma trận chiếu $W$ để tối đa hóa tỷ số định thức:
+\vspace{-0.2cm}
+$$ \boxed{J(W) = \frac{\det(W^T S_B W)}{\det(W^T S_W W)}} $$
+
+\textbf{4. Giải pháp và Kết quả:}
+\begin{itemize}[leftmargin=*, nosep]
+    \item Bài toán trị riêng: $S_B w_i = \lambda_i S_W w_i$ (hoặc $S_W^{-1} S_B w_i = \lambda_i w_i$).
+    \item $W$ được tạo thành từ các \textbf{eigenvectors} ứng với các \textbf{eigenvalues} lớn nhất.
+    \item \textbf{Số chiều tối đa:} $K \le C - 1$ (vì hạng của $S_B$ tối đa là $C-1$).
+\end{itemize}
+}

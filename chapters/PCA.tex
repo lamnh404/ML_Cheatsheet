@@ -1,4 +1,4 @@
-\cheatbox{1. Giới thiệu \& Mục tiêu (Introduction)}{\textStrech}{
+\cheatbox{1. Giới thiệu \& Mục tiêu PCA}{\textStrech}{
 \footnotesize
 \textbf{1. Đầu vào:}
 \begin{itemize}[leftmargin=*, nosep]
@@ -14,7 +14,7 @@
 \end{itemize}
 }
 
-\cheatbox{2. Kiến thức Toán nền tảng (Math Basis)}{\textStrech}{
+\cheatbox{2. Kiến thức Toán nền tảng}{\textStrech}{
 \footnotesize
 \textbf{1. Hình chiếu:}
 Chiếu vector $x$ lên vector $u$: $l = \frac{u^T x}{\|u\|}$.
@@ -28,64 +28,125 @@ Chiếu vector $x$ lên vector $u$: $l = \frac{u^T x}{\|u\|}$.
 \end{itemize}
 
 \textbf{3. Eigenvectors \& Eigenvalues:}
-$$ Au = \lambda u \quad \Leftrightarrow \quad (A - \lambda I)u = 0 $$ (3.7) \\
-$$ => \det(A - \lambda I) = 0 $$ (3.8)
+\\
+$ Au = \lambda u \quad \Leftrightarrow \quad (A - \lambda I)u = 0 (3.7)$  \\
+$ => \det(A - \lambda I) = 0 (3.8)$ \\
 Giải 3.8 để tìm $\lambda_i$ (có tối đa $N$ eigenvalues), thay vào 3.7 để tìm $u_i$.
 
 \textbf{4. Tính chất eigenvectors và eigenvalues $S$:}
-Vuông, đối xứng, bán định dương ($u^T S u \geq 0$).
-}
-
-\cheatbox{3. Cơ sở lý luận (Max Variance Theory)}{\textStrech}{
-\footnotesize
-\textbf{1. Bài toán tối ưu:}
-Tìm hướng $u$ để phương sai khi chiếu dữ liệu lên đó là lớn nhất.
-\vspace{-0.2cm}
-$$ \boxed{u_1 = \operatorname*{argmax}_{u} u^T S u \quad \text{s.t. } u^T u = 1} $$
-
-\textbf{2. Giải bằng Lagrangian:}
-$\mathcal{L}(u, \lambda) = u^T S u - \lambda(u^T u - 1)$.
-\vspace{-0.1cm}
-$$ \frac{\partial \mathcal{L}}{\partial u} = 0 \Rightarrow 2Su - 2\lambda u = 0 \Rightarrow Su = \lambda u $$
-
-\textbf{3. Kết luận:}
-Hướng $u$ tối ưu chính là \textbf{eigenvector} ứng với \textbf{eigenvalue} lớn nhất của ma trận $S$.
-}
-
-\cheatbox{4. Giải thuật PCA (Algorithm)}{\textStrech}{
-\footnotesize
-\textbf{1. Chuẩn hóa (Centering):}
-Tính vector trung bình $\mu = \frac{1}{N}\sum x_n$.
-\vspace{-0.2cm}
-$$ Z = X - \mu^T $$
-
-\textbf{2. Tính Covariance Matrix:}
-$$ S = \frac{1}{N} Z^T Z $$
-
-\textbf{3. Phân rã (Eigendecomposition):}
-Tìm $u_k, \lambda_k$ của $S$. Sắp xếp $\lambda_1 \geq \lambda_2 \dots$.
-Chọn $M$ vectors đầu $\rightarrow$ Ma trận $U_M$.
-
-\textbf{4. Phép chiếu (Rotation):}
-\vspace{-0.2cm}
-$$ \boxed{X_{pca} = Z U_M} $$
-
-\textbf{5. Phục hồi (Reconstruction):}
-$\hat{X} = X_{pca} U_M^T + \mu^T$ (Xấp xỉ).
-}
-\
-\cheatbox{5. Mối quan hệ với SVD}{\textStrech}{
-\footnotesize
-\textbf{1. Định nghĩa SVD:}
-Phân rã ma trận gốc $X$ (đã center):
-$$ X = U \Sigma V^T $$
-
-\textbf{2. Liên hệ PCA:}
 \begin{itemize}[leftmargin=*, nosep]
-    \item Eigenvectors của $S \approx X^T X$ chính là các cột của $V$.
-    \item Eigenvalues $\lambda_i = \frac{s_i^2}{N}$ ($s_i$ là singular values).
+    \item Ma trận A là đối xứng chứa các số thực.
+    \item Có N eigenvector trực giao và N eigenvalue thực không âm.
+    \item Hạng của A bằng số eigenvalue lớn hơn 0.
+    \item Định thức của A là tích các eigenvalue. Trace của A là tổng các eigenvalue.
+    \item Khi hạng của A là N, ma trận $A^-1$ có N eigenvalue = $1/\lambda_i$. (i = 1,...,N)
+\end{itemize}
+}
+
+\cheatbox{3. Bài toán PCA}{\textStrech}{
+\footnotesize
+\textbf{1. Hai quan điểm về PCA:}
+\begin{itemize}[leftmargin=*, nosep]
+    \item PCA chuyển dữ liệu đầu vào là N điểm thuộc D chiều sang không gian con có kích thước M chiều (M < D) sao cho:
+    \item Khi chiếu dữ liệu lên không gian con này, phương sai của dữ liệu là lớn nhất: $argmax_u \frac{1}{N} \sum_{k=1}^N x^2_{u,k}$
+    \item Hoặc khi chiếu dữ liệu lên không gian con này, khoảng cách từ điểm dữ liệu đến không gian con là nhỏ nhất: $argmin_u \sum_{k=1}^N d^2_{u,k}$
 \end{itemize}
 
-\textbf{3. Ưu điểm:}
-SVD ổn định hơn về mặt số học (numerical stability) so với việc tính trực tiếp $S$.
+\textbf{2. Cực đại hóa phương sai:}
+\begin{itemize}[leftmargin=*, nosep]
+    \item Tìm vector $u$ đầu tiên cho ra phương sai lớn nhất. (Tối ưu có ràng buộc và dùng Lagrangian để giải)
+    \item Giả sử đã tìm ra M vector đầu tiên: Các vector đều có chiều dài 1 và trực giao nhau đôi một.
+    \item Tìm vector thứ M+1 sao cho trực giao với M vector trước và có phương sai lớn nhất.
+\end{itemize}
+}
+
+\cheatbox{}{\textStrech}{
+\footnotesize
+\textbf{a. Khi k = 1:}
+
+\begin{itemize}[leftmargin=*]
+    \item Mục tiêu: Tìm u để phương sai của dữ liệu chiếu lên u là lớn nhất.
+    \item Điểm trung tâm của dữ liệu: $\mu = \frac{1}{N} \sum_{n=1}^N x_n$. $z_n = x_n - \mu$ là điểm tương ứng của $x_n$ sau khi dịch về $\mu$.
+    \item Variance của dữ liệu chiếu lên u: $\sigma^2 = \frac{1}{N} \sum_{n=1}^N (u^T z_n)^2 = \frac{1}{N} \sum_{n=1}^N (u^T z_n)(z_n^T u) = \frac{1}{N} \sum_{n=1}^N u^T [z_n z_n^T] u = \frac{1}{N} \sum_{n=1}^N u^T [(x_n - \mu)(x_n - \mu)^T] u = u^T S u$.
+    \item Covariance matrix (ma trận hiệp phương sai): $S = \frac{1}{N} \sum_{n=1}^N (x_n - \mu)(x_n - \mu)^T = Z^T Z = (X - \mu)^T (X - \mu)$. S là ma trận vuông, đối xứng $D \times D$, bán định dương.
+    \item Bài toán tối ưu: $argmax_{u} u^T S u$ với ràng buộc $u^T u = 1$. (S bán định dương => hàm mục tiêu lồi. Giải bằng pp nhân tử Lagrange).
+    \item Lagrangian: $\mathcal{L}(u, \lambda) = u^T S u - \lambda (u^T u - 1)$. Đạo hàm theo u và đặt bằng 0: $\frac{\partial \mathcal{L}}{\partial u} = 0 \Rightarrow Su - \lambda u = 0 \Rightarrow Su = \lambda u$.
+    \item Bài toán trở thành bài toán tìm eigenvector và eigenvalue của ma trận S: $Su_1 = \lambda_1 u_1$. Nghiệm $u_1$ là eigenvector cho variance lớn nhất $\lambda_1$.
+    \item Tính chất của eigenvalues và eigenvectors của S: $\lambda_1 = u_1^T S u_1$ (phương sai lớn nhất).
+\end{itemize}
+
+\textbf{b. Khi k = M:}
+
+\begin{itemize}[leftmargin=*]
+    \item Bài toán tối ưu: $u_{M} = argmax_{u} u^T S u$ với ràng buộc $u^T u = 1$ và $u^T u_k = 0$ với $k = 1, 2, \dots, (M-1)$.
+    \item Mục tiêu: Tìm vector $u_M$ sao cho trực giao với tất cả các vector trước và khi chiếu dữ liệu lên hướng này có phương sai lớn nhất (Vẫn $ \leq \lambda_1, \lambda_2, \dots, \lambda_{M-1}$). Độ lớn của $u_M$ là 1.
+    \item Giả thiết: Đã tìm được cặp $u_k, \lambda_k$ với $k = 2, \dots, M$ từ bài toán tối ưu ở trên.
+\end{itemize}
+
+\textbf{c. Khi k = M+1:}
+\begin{itemize}[leftmargin=*]
+    \item Bài toán tối ưu và mục tiêu: Tương tự như trên nhưng thay M bằng M+1 và M-1 bằng M. Cần suy ra bài toán tối ưu ở đây có nghiệm.
+    \item Lagrangian: $\mathcal{L}(u, \lambda, \mu) = u^T S u - \lambda (u^T u - 1) - \sum_{k=1}^{M} \mu_k (u^T u_k)$.
+    \item Đạo hàm theo u: $\frac{\partial \mathcal{L}}{\partial u} = 2Su - 2\lambda u - \sum_{k=1}^{M} \mu_k u_k$.
+    \item Điểm làm lagrangian cực tiểu là nghiệm khi đạo hàm bằng 0: $2Su - 2\lambda u - \sum_{k=1}^{M} \mu_k u_k = 0$.
+    \item Ở phương trình này, $\mu_k = 0$ vì $u$ trực giao với tất cả $u_k$. Vậy ta nhân hai vế với $u_k$ và có lại phương trình $Su = \lambda u$.
+\end{itemize}
+
+\textbf{2. Giải thuật thu giảm số chiều:}
+\begin{itemize}[leftmargin=*]
+    \item Tính ma trận hiệp phương sai và tìm các cặp $u_k, \lambda_k$ (numpy.linalg.eig, numpy.linalg.eigh).
+    \item Chọn M eigenvector $e_1, e_2, \dots, e_M$. Chọn M bằng kiểm thử chéo.
+    \item Chiếu dữ liệu gốc lên M vector để thu dữ liệu mới.
+\end{itemize}
+}
+
+\cheatbox{}{\textStrech}{
+\footnotesize
+\textbf{3. Singular Value Decomposition (SVD):}
+\begin{itemize}[leftmargin=*]
+    \item SVD là kĩ thuật tổng quát của PCA.
+    \item PCA: Tính ma trận hiệp phương sai $S$ rồi phân rã eigen trên $S$.
+    \item SVD: Phân rã SVD trên chính ma trận gốc (X), quá trình phân rã ổn định hơn.
+    \item Ma trận X được SVD phân rã thành $X = U S V^T$. Với $U(N \times N)$: có cột là eigenvectors của $XX^T$. $V(D \times D)$: có cột là eigenvectors của $X^TX$. $S(N \times D)$: ma trận có đường chéo chính là singular values xếp từ lớn đến nhỏ.
+\end{itemize}
+
+\textbf{Giải thuật}
+\begin{itemize}[leftmargin=*]
+    \item Tính $Z = X - m^T$ với m là total mean = $\frac{1}{N} \sum_{n=1}^N x_n$.
+    \item Dùng SVD phân rã $Z = U S V^T$ (numpy.linalg.svd).
+    \item Chọn M vectors đầu tiên của V tương ứng M singular values lớn nhất tạo $\hat{V}$.
+    \item Chiếu dữ liệu Z lên M eigenvectors: $X_{pca} = Z \hat{V}$.
+\end{itemize}
+
+}
+
+\cheatbox{4. Tổng kết}{\textStrech}{
+\footnotesize
+\textbf{PCA:}
+\begin{itemize}[leftmargin=*, nosep]
+    \item $A = U D U^T = \sum_{i=1}^{r} \lambda_i u_i u_i^T$.
+    \item A: ma trận hiệp phương sai.
+    \item r: hạng của A.
+    \item Thu giảm chiều: Chỉ giữ lại M eigenvector và chiếu X lên các vector này.
+\end{itemize}
+
+\textbf{SVD:}
+\begin{itemize}[leftmargin=*, nosep]
+    \item $A = U S V^T = \sum_{i=1}^{r} s_i u_i v_i^T$.
+    \item A: ma trận bất kỳ.
+    \item r: hạng của A.
+    \item Thu giảm chiều: Chỉ giữ lại M eigenvector và xấp xỉ X lên các vector này.
+\end{itemize}
+}
+\cheatbox{5. PCA qua API}{\textStrech}{
+\footnotesize
+\begin{enumerate}[leftmargin=*, nosep]
+    \item import numpy as np
+    \item from sklearn.decomposition import PCA
+    \item X = np.array([[-1, -1], [-2, -1], [-3, -2], [1, 1], [2, 1], [3, 2]])
+    \item pca = PCA(n\_components=2)
+    \item pca.fit(X)
+    \item print(pca.explained\_variance\_ratio\_)
+    \item print(pca.singular\_values\_)
+\end{enumerate}
 }
