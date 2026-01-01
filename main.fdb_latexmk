@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1767237177.99806 "d:/ML_Cheatsheet/main.tex" "main.pdf" "main" 1767237179.16627 0
+["pdflatex"] 1767244546.72541 "d:/ML_Cheatsheet/main.tex" "main.pdf" "main" 1767244547.9532 0
   "C:/Users/Asus" 1766968203 12666 f9c5eb92aeb5cbfe2a2ec1b13432f358 ""
   "C:/Users/Asus TUF/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1767154753 89997 008b71c0c00a33f5fc03307b772025e5 ""
   "C:/Users/Asus TUF/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm0800.pk" 1767199268 9292 033fbc827bc1391730a9818977629f42 ""
@@ -201,12 +201,12 @@
   "C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/tex/latex/vntex/t5enc.dfu" 1368738347 13949 387dd4fa58aea5f873839c93430fffed ""
   "C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
   "C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/tex/latex/xkeyval/xkeyval.sty" 1656236919 4937 4ce600ce9bd4ec84d0250eb6892fcf4f ""
-  "chapters/SVM.tex" 1767237177 6212 24f1d859ded097d6dc94ff9fe4dead64 ""
+  "chapters/SVM.tex" 1767244546 6505 31baa53a4b34f61f8dc32c099225b6f6 ""
   "cheatsheet.sty" 1767154497 2253 be2c434450a24219842548866c3f5f7d ""
   "d:/ML_Cheatsheet/main.tex" 1767237043 1023 71b27e5a7888df91e6b5b6c19f58c430 ""
   "dependencies.sty" 1767154497 361 79b239218dcca34281dda9c944e34844 ""
   "formatting.sty" 1767154497 231 5fb1b40aa916d132f18bf09dd011f166 ""
-  "main.aux" 1767237178 207 d39d7d99891e722555e4a8fa32e18f85 "pdflatex"
+  "main.aux" 1767244547 207 d39d7d99891e722555e4a8fa32e18f85 "pdflatex"
   "main.tex" 1767237043 1023 71b27e5a7888df91e6b5b6c19f58c430 ""
   (generated)
   "main.aux"

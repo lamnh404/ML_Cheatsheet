@@ -71,7 +71,21 @@ $$ \boxed{\mathcal{L}(w^*,b^*,\alpha) \leq \frac{1}{2}\|w^*\|^2} $$
     \item \textbf{(KKT-4)} Điều kiện bù: $\alpha_n\{1 - t_n(w^T x_n + b)\} = 0$
 \end{itemize}
 
-\textbf{Ý nghĩa:} Thỏa KKT $\Rightarrow$ $(w,b,\alpha) = (w^*,b^*,\alpha^*)$
+\textbf{Ý nghĩa:} Thỏa KKT $\Rightarrow$ $(w,b,\alpha) = (w^*,b^*,\alpha^*)$\\
+\textbf{5. Tiêu chuẩn Slater (cho SVM):}
+
+Nếu phần trong của tập khả thi không rỗng thì:
+\[
+\exists (w,b)\ \text{s.t.}\ 
+1 - t_i(w^T x_i + b) < 0,\ \forall i
+\]
+
+\[
+\Longrightarrow \text{strong duality }(p^* = d^*)
+\;\Leftrightarrow\;
+\text{duality gap} = 0
+\]
+
 \vspace{-0.2cm}
 }
 
@@ -98,7 +112,7 @@ $$ - \sum_{n} \alpha_n t_n \underbrace{\left( \sum_{m} \alpha_m t_m x_m \right)^
 \textbf{C. Kết quả ($A + B = -A$):}
 \vspace{-0.2cm}
 $$ \boxed{\begin{aligned}
-\max_{\alpha} \quad & \sum_{n} \alpha_n - \frac{1}{2} \sum_{i,j} \alpha_i \alpha_j t_i t_j (x_i^T x_j) \\
+\max_{\alpha} g(\alpha) = \quad & \sum_{n} \alpha_n - \frac{1}{2} \sum_{i,j} \alpha_i \alpha_j t_i t_j (x_i^T x_j) \\
 \text{s.t.} \quad & \alpha_n \geq 0; \quad \sum \alpha_n t_n = 0
 \end{aligned}} $$
 \vspace{-0.4cm}
