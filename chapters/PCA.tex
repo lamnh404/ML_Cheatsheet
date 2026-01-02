@@ -95,7 +95,7 @@ aei + bfg + cdh
     \item Mục tiêu: Tìm u để phương sai của dữ liệu chiếu lên u là lớn nhất.
     \item Điểm trung tâm của dữ liệu: $\mu = \frac{1}{N} \sum_{n=1}^N x_n$. $z_n = x_n - \mu$ là điểm tương ứng của $x_n$ sau khi dịch về $\mu$.
     \item Variance của dữ liệu chiếu lên u: $\sigma^2 = \frac{1}{N} \sum_{n=1}^N (u^T z_n)^2 = \frac{1}{N} \sum_{n=1}^N (u^T z_n)(z_n^T u) = \frac{1}{N} \sum_{n=1}^N u^T [z_n z_n^T] u = \frac{1}{N} \sum_{n=1}^N u^T [(x_n - \mu)(x_n - \mu)^T] u = u^T S u$.
-    \item Covariance matrix (ma trận hiệp phương sai): $S = \frac{1}{N} \sum_{n=1}^N (x_n - \mu)(x_n - \mu)^T = Z^T Z = (X - \mu)^T (X - \mu)$. S là ma trận vuông, đối xứng $D \times D$, bán định dương.
+    \item Covariance matrix (ma trận hiệp phương sai): $S = \frac{1}{N} \sum_{n=1}^N (x_n - \mu)(x_n - \mu)^T =\frac{1}{N} Z^T Z =\frac{1}{N} (X - \mu)^T (X - \mu)$. S là ma trận vuông, đối xứng $D \times D$, bán định dương.
     \item Bài toán tối ưu: $argmax_{u} u^T S u$ với ràng buộc $u^T u = 1$. (S bán định dương => hàm mục tiêu lồi. Giải bằng pp nhân tử Lagrange).
     \item Lagrangian: $\mathcal{L}(u, \lambda) = u^T S u - \lambda (u^T u - 1)$. Đạo hàm theo u và đặt bằng 0: $\frac{\partial \mathcal{L}}{\partial u} = 0 \Rightarrow Su - \lambda u = 0 \Rightarrow Su = \lambda u$.
     \item Bài toán trở thành bài toán tìm eigenvector và eigenvalue của ma trận S: $Su_1 = \lambda_1 u_1$. Nghiệm $u_1$ là eigenvector cho variance lớn nhất $\lambda_1$.
@@ -134,14 +134,14 @@ aei + bfg + cdh
     \item SVD là kĩ thuật tổng quát của PCA.
     \item PCA: Tính ma trận hiệp phương sai $S$ rồi phân rã eigen trên $S$.
     \item SVD: Phân rã SVD trên chính ma trận gốc (X), quá trình phân rã ổn định hơn.
-    \item Ma trận X được SVD phân rã thành $X = U S V^T$. Với $U(N \times N)$: có cột là eigenvectors của $XX^T$. $V(D \times D)$: có cột là eigenvectors của $X^TX$. $S(N \times D)$: ma trận có đường chéo chính là singular values xếp từ lớn đến nhỏ.
+    \item Ma trận X được SVD phân rã thành $X = U S V^T$. Với $U(N \times N)$: có cột là eigenvectors của $XX^T$. $V(D \times D)$: có cột là eigenvectors của $X^TX$. $S(N \times D)$: ma trận có đường chéo chính là singular values xếp từ lớn đến nhỏ. (\text{Singular Value là căn bậc 2 của eigenvalue})
 \end{itemize}
 
 \textbf{Giải thuật}
 \begin{itemize}[leftmargin=*]
     \item Tính $Z = X - m^T$ với m là total mean = $\frac{1}{N} \sum_{n=1}^N x_n$.
     \item Dùng SVD phân rã $Z = U S V^T$ (numpy.linalg.svd).
-    \item Chọn M vectors đầu tiên của V tương ứng M singular values lớn nhất tạo $\hat{V}$. (\text{Singular Value là căn bậc 2 của eigenvalue})
+    \item Chọn M vectors đầu tiên của V tương ứng M singular values lớn nhất tạo $\hat{V}$. 
     \item Chiếu dữ liệu Z lên M eigenvectors: $X_{pca} = Z \hat{V}$.
 \end{itemize}
 
