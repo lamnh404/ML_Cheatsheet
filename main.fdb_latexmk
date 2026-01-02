@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1767341515.53994 "d:/ML_Cheatsheet/main.tex" "main.pdf" "main" 1767341517.07845 0
+["pdflatex"] 1767344852.09756 "d:/ML_Cheatsheet/main.tex" "main.pdf" "main" 1767344853.74563 0
   "C:/Users/Asus" 1766968203 12666 f9c5eb92aeb5cbfe2a2ec1b13432f358 ""
   "C:/Users/Asus TUF/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1767154753 89997 008b71c0c00a33f5fc03307b772025e5 ""
   "C:/Users/Asus TUF/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcbx0500.pk" 1767341487 6136 567d2a84bb627e8ac32f01de710fda9b ""
@@ -214,12 +214,12 @@
   "chapters/DeepLearning.tex" 1767341514 11561 00451d3559c5133a3612aa4a677486ac ""
   "chapters/LDA.tex" 1767315424 3900 cbf54cd36ba5c3475a9d06a83b406636 ""
   "chapters/PCA.tex" 1767326809 9383 08823938a93329d207cf43fb14b5aa3c ""
-  "chapters/SVM.tex" 1767315424 6780 fbd0e7d8a79d1c856babcc9bd72e2a9f ""
+  "chapters/SVM.tex" 1767344851 6953 c3b5248735e255c4133714e87e64c944 ""
   "cheatsheet.sty" 1767154497 2253 be2c434450a24219842548866c3f5f7d ""
   "d:/ML_Cheatsheet/main.tex" 1767315513 1148 a13ecb0eec5bef40fa6a92327235f7d7 ""
   "dependencies.sty" 1767154497 361 79b239218dcca34281dda9c944e34844 ""
   "formatting.sty" 1767154497 231 5fb1b40aa916d132f18bf09dd011f166 ""
-  "main.aux" 1767341516 207 c738c85975e69c9aad91d973ffc87579 "pdflatex"
+  "main.aux" 1767344853 207 c738c85975e69c9aad91d973ffc87579 "pdflatex"
   "main.tex" 1767315513 1148 a13ecb0eec5bef40fa6a92327235f7d7 ""
   (generated)
   "main.aux"

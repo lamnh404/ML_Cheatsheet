@@ -197,15 +197,22 @@ $C$ nhỏ $\Rightarrow$ cho sai nhiều (lề rộng).
 
 \vspace{0.05cm}
 \textbf{4. Kernel Trick:}
-Thay tích vô hướng:
+Thay thế tích vô hướng trong không gian đặc trưng:
 \[
-x_i^T x_j \;\longrightarrow\; k(x_i, x_j)
+\langle \phi(x_i), \phi(x_j) \rangle
+\;\longrightarrow\;
+k(x_i, x_j)
 \]
 \[
-f(x)
-= \sum_{n\in SV} \alpha_n t_n\, k(x_n,x) + b,
+k(x,z) = \phi(x)^\top \phi(z)
+\]
+\vspace{-0.2cm}
+Hàm quyết định của SVM:
+\[
+f(x) = \sum_{n \in SV} \alpha_n t_n\, k(x_n, x) + b,
 \qquad
-y = \mathrm{sign}(f(x))
+y = \mathrm{sign}\!\left(f(x)\right)
 \]
-\vspace{0.2cm}
+\vspace{-0.2cm}
+
 }
