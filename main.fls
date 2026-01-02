@@ -334,15 +334,19 @@ INPUT .\chapters\DeepLearning.tex
 INPUT chapters\DeepLearning.tex
 INPUT C:\Users\Asus TUF\AppData\Local\Programs\MiKTeX\fonts\tfm\vntex\vnr\vnbx6.tfm
 INPUT C:\Users\Asus TUF\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\tcrm0600.tfm
+INPUT C:\Users\Asus TUF\AppData\Local\Programs\MiKTeX\fonts\tfm\vntex\vnr\vnti7.tfm
+INPUT C:\Users\Asus TUF\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\tcbx0500.tfm
+OUTPUT main.pdf
+INPUT C:\Users\Asus TUF\AppData\Local\MiKTeX\fonts\map\pdftex\pdftex.map
 INPUT .\chapters\PCA.tex
 INPUT .\chapters\PCA.tex
 INPUT chapters\PCA.tex
-OUTPUT main.pdf
-INPUT C:\Users\Asus TUF\AppData\Local\MiKTeX\fonts\map\pdftex\pdftex.map
 INPUT .\chapters\LDA.tex
 INPUT .\chapters\LDA.tex
 INPUT chapters\LDA.tex
 INPUT main.aux
+INPUT C:\Users\Asus TUF\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\tcbx0500.pk
+INPUT C:\Users\Asus TUF\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\tcbx0500.pk
 INPUT C:\Users\Asus TUF\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\tcrm0600.pk
 INPUT C:\Users\Asus TUF\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\tcrm0600.pk
 INPUT C:\Users\Asus TUF\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\tcrm0800.pk
@@ -403,3 +407,5 @@ INPUT C:\Users\Asus TUF\AppData\Local\Programs\MiKTeX\fonts\type1\vntex\vnr\vnr7
 INPUT C:\Users\Asus TUF\AppData\Local\Programs\MiKTeX\fonts\type1\vntex\vnr\vnr7.pfb
 INPUT C:\Users\Asus TUF\AppData\Local\Programs\MiKTeX\fonts\type1\vntex\vnr\vnr8.pfb
 INPUT C:\Users\Asus TUF\AppData\Local\Programs\MiKTeX\fonts\type1\vntex\vnr\vnr8.pfb
+INPUT C:\Users\Asus TUF\AppData\Local\Programs\MiKTeX\fonts\type1\vntex\vnr\vnti7.pfb
+INPUT C:\Users\Asus TUF\AppData\Local\Programs\MiKTeX\fonts\type1\vntex\vnr\vnti7.pfb

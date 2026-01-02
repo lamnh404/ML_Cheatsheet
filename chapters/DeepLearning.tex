@@ -147,11 +147,367 @@ x, & x > 0 \\
 \]
 \vspace{-4pt}
 
-\textbf{With regularization (Ridge):}
-\vspace{-2pt}
-\[
-\mathbf{w}^* = (\mathbf{X}^\top \mathbf{X} + \lambda \mathbf{I})^{-1} \mathbf{X}^\top \mathbf{y}
-\]
-\vspace{-4pt}
+\textbf{Hồi quy Ridge:}
 
+\[
+\mathcal{L}(\mathbf{w})
+= \frac{1}{2}\|\mathbf{X}\mathbf{w} - \mathbf{y}\|_2^2
++ \frac{\lambda}{2}\|\mathbf{w}\|_2^2
+\]
+
+
+\[
+\mathbf{w}^*
+= (\mathbf{X}^\top \mathbf{X} + \lambda \mathbf{I})^{-1}
+\mathbf{X}^\top \mathbf{y}
+\]
+
+\vspace{0.15cm}
+\textbf{Hồi quy LASSO:}
+
+\[
+\mathcal{L}(\mathbf{w})
+= \frac{1}{2}\|\mathbf{X}\mathbf{w} - \mathbf{y}\|_2^2
++ \frac{\lambda}{2}\|\mathbf{w}\|_1
+\]
+
+
+\[
+\mathbf{w}^* 
+\quad \text{(không có nghiệm dạng đóng, cần giải bằng phương pháp lặp)}
+\]
+
+\textbf{Hồi quy Logistic:}
+
+
+\textit{Mô hình dự báo:}
+
+\[
+\hat{y}_n
+= p(y_n = 1 \mid \mathbf{x}_n, \mathbf{w})
+= \sigma(\mathbf{w}^\top \mathbf{x}_n)
+= \frac{1}{1 + \exp(-\mathbf{w}^\top \mathbf{x}_n)}
+\]
+
+\vspace{0.1cm}
+\textit{Hàm mục tiêu (negative log-likelihood / cross-entropy):}
+
+\[
+\mathcal{L}(\mathbf{w})
+= - \sum_{n=1}^{N}
+\Big[
+y_n \log \hat{y}_n
++ (1 - y_n)\log(1 - \hat{y}_n)
+\Big]
+\]
+
+
+\textit{Gradient của hàm mất mát:}
+
+\[
+\nabla \mathcal{L}(\mathbf{w})
+= \sum_{n=1}^{N} (\hat{y}_n - y_n)\mathbf{x}_n
+= \mathbf{X}^\top (\hat{\mathbf{y}} - \mathbf{y})
+\]
+
+
+\[
+\mathbf{w}^*
+\quad \text{(không có nghiệm dạng đóng, giải bằng phương pháp lặp)}
+\]
+}
+
+
+
+
+
+
+% Convolutional Neural Networks (CNNs)
+
+\cheatbox{1. Convolution Cơ Bản}{\textStrech}{
+\footnotesize
+
+\textbf{1. Định nghĩa Convolution:}
+\[
+Y(u,v) = X * W = \sum_{i=-r}^{r} \sum_{j=-r}^{r} X(u-i, v-j)W(i,j)
+\]
+với $r = \lfloor k/2 \rfloor$ (bán kính kernel)
+
+\textbf{Cross-correlation:}
+\[
+Y(u,v) = X \star W = \sum_{i=-r}^{r} \sum_{j=-r}^{r} X(u+i, v+j)W(i,j)
+\]
+\textbf{=> Hầu hết thư viện Deep Learning (CNN) gọi là convolution nhưng thực chất đang dùng cross-correlation}\\
+\textbf{Kích thước output:}
+\[
+o_1 \times o_2 = (i_1 - k_1 + 1) \times (i_2 - k_2 + 1)
+\]
+
+\textbf{Thuật toán:}
+\begin{enumerate}[leftmargin=*, nosep]
+    \item Xoay kernel 180° → $\text{Rot}_{180}(W)$
+    \item Flatten kernel thành vector
+    \item Padding input (nếu cần)
+    \item Căn chỉnh kernel với góc trên-trái
+    \item Lấy sub-image, flatten và tính dot-product
+    \item Trượt kernel theo stride, lặp lại
+\end{enumerate}
+\vspace{0.2cm}
+}
+
+\cheatbox{2. Padding \& Stride}{\textStrech}{
+\footnotesize
+
+\textbf{1. Half Padding:}
+Padding size: $p = \lfloor k/2 \rfloor$
+\[
+\text{Output: } i_1 \times i_2 \text{ (giữ nguyên kích thước)}
+\]
+
+\textbf{2. Full Padding:}
+Padding size: $p = k-1$
+\[
+\text{Output: } (i_1 + k_1 - 1) \times (i_2 + k_2 - 1)
+\]
+
+\textbf{3. Non-unit Stride:}
+Với stride $s_1, s_2$:
+\[
+\text{Output: } \left\lfloor \frac{i_1 + 2p_1 - k_1}{s_1} \right\rfloor + 1 \times \left\lfloor \frac{i_2 + 2p_2 - k_2}{s_2} \right\rfloor + 1
+\]
+
+\textbf{4. Multi-channel Input:}
+Input $D$ channels → mỗi filter có $D$ channels
+\[
+y_{u,v} = \sum_{d=1}^{D} \sum_{i,j} W^{(d)}_{i,j} X^{(d)}_{u+i,v+j}
+\]
+
+\textbf{5. Multi-filters Layer:}
+$K$ filters → output có $K$ channels
+\vspace{0.2cm}
+}
+
+\cheatbox{VD: Rotate 180° Kernel}{\textStrech}{
+\footnotesize
+
+\textbf{Ma trận gốc W:}
+\[
+W = \begin{bmatrix}
+1 & 0 & 2 \\
+1 & 2 & 0 \\
+0 & 1 & 1
+\end{bmatrix}
+\]
+\begin{enumerate}[leftmargin=*, nosep]
+    \item Flip horizontal:
+    $\begin{bmatrix}
+    2 & 0 & 1 \\
+    0 & 2 & 1 \\
+    1 & 1 & 0
+    \end{bmatrix}$
+    
+    \item Flip vertical:
+    $\text{Rot}_{180}(W) = \begin{bmatrix}
+    1 & 1 & 0 \\
+    0 & 2 & 1 \\
+    2 & 0 & 1
+    \end{bmatrix}$
+\end{enumerate}
+
+}
+
+\cheatbox{3. Backprop qua Conv2D}{\textStrech}{
+\footnotesize
+
+\textbf{Forward:} $Y = X * W$
+
+\textbf{Backward - Tính $\Delta W$:}
+\[
+\boxed{\Delta W = \text{Rot}_{180}(\Delta Y) * X}
+\]
+\begin{itemize}[leftmargin=*, nosep]
+    \item $\text{Rot}_{180}(\Delta Y)$ làm input, no padding
+    \item $X$ làm kernel
+\end{itemize}
+
+\textbf{Chi tiết:}
+\[
+\delta w_{ij} = \sum_{u,v} \delta y_{u,v} \cdot x_{u+i,v+j}
+\]
+
+\textbf{Backward - Tính $\Delta X$:}
+\[
+\boxed{\Delta X = \text{Rot}_{180}(W) * \Delta Y}
+\]
+\begin{itemize}[leftmargin=*, nosep]
+    \item $\text{Rot}_{180}(W)$ làm input, full padding
+    \item $\Delta Y$ làm kernel
+\end{itemize}
+
+\textbf{Chi tiết:}
+\[
+\delta x_{uv} = \sum_{i,j} \delta y_{ij} \cdot w_{u-i,v-j}
+\]
+\vspace{0.2cm}
+}
+
+\cheatbox{4. Matrix Form Convolution}{\textStrech}{
+\footnotesize
+
+\textbf{Ký hiệu:}
+\begin{itemize}[leftmargin=*, nosep]
+    \item $\mathbb{X}_{conv}$: matrix từ im2col (X thành columns)
+    \item $\mathbb{W}_{flat}$: flatten kernel thành row
+    \item $\mathbb{W}_{conv}$: kernel2row matrix
+\end{itemize}
+
+\textbf{Forward:}
+\[
+X * W = \text{Reshape}_{o_1 \times o_2}(\mathbb{W}_{flat} \times \mathbb{X}_{conv})
+\]
+\[
+= \text{Reshape}_{o_1 \times o_2}(\mathbb{W}_{conv} \times \mathbb{X}_{flat})
+\]
+
+\textbf{Backward - $\Delta W$:}
+\[
+\Delta W = \text{Reshape}_{k_1 \times k_2}(\Delta \mathbb{Y}_{flat} \times \mathbb{X}^T_{conv})
+\]
+
+\textbf{Backward - $\Delta X$:}
+\[
+\Delta X = \text{Reshape}_{i_1 \times i_2}(\mathbb{W}^T_{conv} \times \Delta \mathbb{Y}_{flat})
+\]
+
+\textbf{Ưu điểm:} Tận dụng phép nhân ma trận tối ưu
+\vspace{0.2cm}
+}
+
+\cheatbox{5. Fully-Connected Layer}{\textStrech}{
+\footnotesize
+
+\textbf{Forward:}
+\[
+y = Wx + b
+\]
+với $W \in \mathbb{R}^{N \times M}$, $x \in \mathbb{R}^M$, $b \in \mathbb{R}^N$
+
+\textbf{Số tham số:} $M \times N + N$
+
+\textbf{Backward - $\Delta W$:}
+\[
+\boxed{\Delta W = \Delta y \cdot x^T}
+\]
+\[
+\delta w_{n,m} = \delta y_n \cdot x_m
+\]
+
+\textbf{Backward - $\Delta b$:}
+\[
+\boxed{\Delta b = \Delta y}
+\]
+
+\textbf{Backward - $\Delta X$:}
+\[
+\boxed{\Delta X = W^T \cdot \Delta y}
+\]
+\[
+\delta x_m = \sum_{n=1}^{N} \delta y_n \cdot w_{n,m}
+\]
+
+\textbf{Update trọng số:}
+\[
+W \leftarrow W - \alpha \Delta W, \quad b \leftarrow b - \alpha \Delta b
+\]
+\vspace{0.2cm}
+}
+
+\cheatbox{6. Conv vs FC}{\textStrech}{
+\footnotesize
+
+\textbf{Fully-Connected:}
+\begin{itemize}[leftmargin=*, nosep]
+    \item Dense connectivity: mỗi output nối với mọi input
+    \item Mỗi output có bộ weights riêng
+    \item Số tham số: $(i_1 \times i_2) \times (o_1 \times o_2) + (o_1 \times o_2)$
+    \item VD: input 3×3, output 2×2 → 9×4 + 4 = 40 params
+\end{itemize}
+
+\textbf{Convolution:}
+\begin{itemize}[leftmargin=*, nosep]
+    \item Sparse connectivity: output chỉ nối vùng local
+    \item Parameter sharing: tất cả output dùng chung weights
+    \item Số tham số: $k_1 \times k_2 \times D + 1$ (với D channels)
+    \item VD: kernel 2×2 → 4 + 1 = 5 params
+\end{itemize}
+
+\textbf{Ưu điểm Conv:}
+Giảm tham số, học local patterns, translation invariant
+\vspace{0.2cm}
+}
+
+\cheatbox{7. Pooling Layer}{\textStrech}{
+\footnotesize
+
+\textbf{Mục đích:}
+\begin{itemize}[leftmargin=*, nosep]
+    \item Downsampling feature maps
+    \item Loại bỏ redundant features
+    \item Giảm overfitting
+\end{itemize}
+
+\textbf{Max Pooling:}
+\[
+y_{u,v} = \max_{(i,j) \in \text{window}} x_{i,j}
+\]
+
+\textbf{Average Pooling:}
+\[
+y_{u,v} = \frac{1}{k_1 \times k_2} \sum_{(i,j) \in \text{window}} x_{i,j}
+\]
+
+\textbf{Output size (stride = 1):}
+\[
+(i_1 - k_1 + 1) \times (i_2 - k_2 + 1)
+\]
+
+\textbf{Output size (stride = s):}
+\[
+\left\lfloor \frac{i_1 - k_1}{s_1} \right\rfloor + 1 \times \left\lfloor \frac{i_2 - k_2}{s_2} \right\rfloor + 1
+\]
+
+\textbf{Thường dùng:} window 2×2 hoặc 3×3, stride = 2
+\vspace{0.2cm}
+}
+
+\cheatbox{8. Gradient Descent}{\textStrech}{
+\footnotesize
+
+\textbf{Forward Pass:}
+Tính output từ input qua các layers
+
+\textbf{Backward Pass (Backpropagation):}
+Tính gradients theo chain rule:
+\[
+\frac{\partial \mathcal{L}}{\partial w} = \frac{\partial \mathcal{L}}{\partial y} \cdot \frac{\partial y}{\partial w}
+\]
+
+\textbf{Batch Gradient Descent:}
+\[
+\Delta w = \frac{1}{m} \sum_{i=1}^{m} \Delta w^{(i)}
+\]
+\[
+w \leftarrow w - \alpha \Delta w
+\]
+
+với $\alpha$ là learning rate, $m$ là batch size
+
+\textbf{Quy trình:}
+\begin{enumerate}[leftmargin=*, nosep]
+    \item Forward qua tất cả samples trong batch
+    \item Backward tính gradients cho từng sample
+    \item Trung bình gradients
+    \item Update weights
+\end{enumerate}
+\vspace{0.2cm}
 }

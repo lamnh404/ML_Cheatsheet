@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.13)  2 JAN 2026 09:09
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.13)  2 JAN 2026 15:11
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1010,18 +1010,65 @@ Overfull \hbox (2.09277pt too wide) in paragraph at lines 135--136
 [][] 
  []
 
-) (chapters/DeepLearning.tex) (chapters/PCA.tex
-Overfull \hbox (2.09277pt too wide) in paragraph at lines 211--16
+) (chapters/DeepLearning.tex
+Overfull \hbox (2.09277pt too wide) in paragraph at lines 211--219
 [][]
  []
 
 
-Overfull \hbox (2.09277pt too wide) in paragraph at lines 211--16
-[]
+Overfull \hbox (2.09277pt too wide) in paragraph at lines 211--219
+[] 
  []
 
 
-Overfull \hbox (2.09277pt too wide) in paragraph at lines 211--16
+Overfull \hbox (2.09277pt too wide) in paragraph at lines 256--257
+[][] 
+ []
+
+
+Overfull \hbox (2.09277pt too wide) in paragraph at lines 288--289
+[][] 
+ []
+
+[1
+
+{C:/Users/Asus TUF/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
+Overfull \hbox (2.09277pt too wide) in paragraph at lines 317--318
+[][] 
+ []
+
+
+Overfull \hbox (2.09277pt too wide) in paragraph at lines 352--353
+[][] 
+ []
+
+
+Overfull \hbox (2.09277pt too wide) in paragraph at lines 384--385
+[][] 
+ []
+
+
+Overfull \hbox (2.09277pt too wide) in paragraph at lines 423--424
+[][] 
+ []
+
+
+Overfull \hbox (2.09277pt too wide) in paragraph at lines 447--448
+[][] 
+ []
+
+
+Overfull \hbox (2.09277pt too wide) in paragraph at lines 481--482
+[][] 
+ []
+
+) (chapters/PCA.tex
+Overfull \hbox (2.09277pt too wide) in paragraph at lines 513--16
+[][]
+ []
+
+
+Overfull \hbox (2.09277pt too wide) in paragraph at lines 513--16
 [] 
  []
 
@@ -1035,9 +1082,7 @@ Overfull \hbox (2.09277pt too wide) in paragraph at lines 61--62
 [][] 
  []
 
-[1
-
-{C:/Users/Asus TUF/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
+[2]
 Overfull \hbox (2.09277pt too wide) in paragraph at lines 89--90
 [][] 
  []
@@ -1055,6 +1100,16 @@ Underfull \hbox (badness 5417) in paragraph at lines 129--129
 
 Overfull \hbox (2.09277pt too wide) in paragraph at lines 129--130
 [][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 149--149
+[]\T5/cmr/m/n/8 Chån M vec-tors ^^_¦u ti¶n cõa V t÷ìng
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 149--149
+\T5/cmr/m/n/8 ùng M sin-gu-lar val-ues lîn nh§t t¤o $[]$.
  []
 
 
@@ -1087,7 +1142,7 @@ Overfull \hbox (2.09277pt too wide) in paragraph at lines 54--55
 [][] 
  []
 
-[2])
+[3])
 Overfull \hbox (2.09277pt too wide) in paragraph at lines 87--38
 [][]
  []
@@ -1097,24 +1152,24 @@ Underfull \hbox (badness 10000) in paragraph at lines 87--38
 
  []
 
-[3] (main.aux)
+[4] (main.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-11-06>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 21949 strings out of 467871
- 426659 string characters out of 5416887
- 879595 words of memory out of 5000000
- 50394 multiletter control sequences out of 15000+600000
- 645827 words of font info for 83 fonts, out of 8000000 for 9000
+ 21960 strings out of 467871
+ 426851 string characters out of 5416887
+ 881811 words of memory out of 5000000
+ 50403 multiletter control sequences out of 15000+600000
+ 646991 words of font info for 85 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 99i,17n,131p,444b,893s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <C:\Users\Asus TUF\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm0600.pk> <C:\Users\Asus TUF\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm0800.pk><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx6.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx7.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx8.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cmextra/cmex7.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cmextra/cmex8.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm7.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/vnr/vnbx12.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/vnr/vnbx5.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/vnr/vnbx6.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/vnr/vnbx8.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/vnr/vnr10.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/vnr/vnr5.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/vnr/vnr6.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/vnr/vnr7.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/vnr/vnr8.pfb>
-Output written on main.pdf (3 pages, 353576 bytes).
+ 99i,17n,131p,444b,940s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\Asus TUF\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcbx0500.pk> <C:\Users\Asus TUF\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm0600.pk> <C:\Users\Asus TUF\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm0800.pk><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx6.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx7.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx8.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cmextra/cmex7.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cmextra/cmex8.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm7.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/vnr/vnbx12.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/vnr/vnbx5.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/vnr/vnbx6.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/vnr/vnbx8.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/vnr/vnr10.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/vnr/vnr5.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/vnr/vnr6.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/vnr/vnr7.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/vnr/vnr8.pfb><C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/fonts/type1/vntex/vnr/vnti7.pfb>
+Output written on main.pdf (4 pages, 395020 bytes).
 PDF statistics:
- 165 PDF objects out of 1000 (max. 8388607)
+ 181 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
