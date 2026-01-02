@@ -334,8 +334,14 @@ INPUT .\chapters\DeepLearning.tex
 INPUT chapters\DeepLearning.tex
 INPUT C:\Users\Asus TUF\AppData\Local\Programs\MiKTeX\fonts\tfm\vntex\vnr\vnbx6.tfm
 INPUT C:\Users\Asus TUF\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\tcrm0600.tfm
+INPUT .\chapters\PCA.tex
+INPUT .\chapters\PCA.tex
+INPUT chapters\PCA.tex
 OUTPUT main.pdf
 INPUT C:\Users\Asus TUF\AppData\Local\MiKTeX\fonts\map\pdftex\pdftex.map
+INPUT .\chapters\LDA.tex
+INPUT .\chapters\LDA.tex
+INPUT chapters\LDA.tex
 INPUT main.aux
 INPUT C:\Users\Asus TUF\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\tcrm0600.pk
 INPUT C:\Users\Asus TUF\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\tcrm0600.pk

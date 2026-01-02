@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1767255952.10482 "d:/ML_Cheatsheet/main.tex" "main.pdf" "main" 1767255953.41399 0
+["pdflatex"] 1767319751.92812 "d:/ML_Cheatsheet/main.tex" "main.pdf" "main" 1767319753.28394 0
   "C:/Users/Asus" 1766968203 12666 f9c5eb92aeb5cbfe2a2ec1b13432f358 ""
   "C:/Users/Asus TUF/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1767154753 89997 008b71c0c00a33f5fc03307b772025e5 ""
   "C:/Users/Asus TUF/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm0600.pk" 1767154756 7284 0d911e5225891c2722113daa737a03e2 ""
@@ -207,14 +207,16 @@
   "C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/tex/latex/vntex/t5enc.dfu" 1368738347 13949 387dd4fa58aea5f873839c93430fffed ""
   "C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
   "C:/Users/Asus TUF/AppData/Local/Programs/MiKTeX/tex/latex/xkeyval/xkeyval.sty" 1656236919 4937 4ce600ce9bd4ec84d0250eb6892fcf4f ""
-  "chapters/DeepLearning.tex" 1767255951 3267 f701c59b81fb068fce435a1180da9ca6 ""
-  "chapters/SVM.tex" 1767254955 6569 fbd0e7d8a79d1c856babcc9bd72e2a9f ""
+  "chapters/DeepLearning.tex" 1767315424 3267 f701c59b81fb068fce435a1180da9ca6 ""
+  "chapters/LDA.tex" 1767315424 3900 cbf54cd36ba5c3475a9d06a83b406636 ""
+  "chapters/PCA.tex" 1767319737 9325 818b5a7377a7e62576ec30d3454fab3a ""
+  "chapters/SVM.tex" 1767315424 6780 fbd0e7d8a79d1c856babcc9bd72e2a9f ""
   "cheatsheet.sty" 1767154497 2253 be2c434450a24219842548866c3f5f7d ""
-  "d:/ML_Cheatsheet/main.tex" 1767251695 1057 480503aa6e92ea0c49ae1dd1c7cf8f8b ""
+  "d:/ML_Cheatsheet/main.tex" 1767315513 1148 a13ecb0eec5bef40fa6a92327235f7d7 ""
   "dependencies.sty" 1767154497 361 79b239218dcca34281dda9c944e34844 ""
   "formatting.sty" 1767154497 231 5fb1b40aa916d132f18bf09dd011f166 ""
-  "main.aux" 1767255953 207 d39d7d99891e722555e4a8fa32e18f85 "pdflatex"
-  "main.tex" 1767251695 1057 480503aa6e92ea0c49ae1dd1c7cf8f8b ""
+  "main.aux" 1767319752 207 d3758847070a7e42a30d57ab9025eaf2 "pdflatex"
+  "main.tex" 1767315513 1148 a13ecb0eec5bef40fa6a92327235f7d7 ""
   (generated)
   "main.aux"
   "main.log"
