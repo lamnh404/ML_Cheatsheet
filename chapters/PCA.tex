@@ -132,8 +132,7 @@ aei + bfg + cdh
 \textbf{3. Singular Value Decomposition (SVD):}
 \begin{itemize}[leftmargin=*]
     \item SVD là kĩ thuật tổng quát của PCA.
-    \item PCA: Tính ma trận hiệp phương sai $S$ rồi phân rã eigen trên $S$.
-    \item SVD: Phân rã SVD trên chính ma trận gốc (X), quá trình phân rã ổn định hơn.
+    \item PCA: Tính ma trận hiệp phương sai $S$ rồi phân rã eigen trên $S$. SVD: Phân rã SVD trên chính ma trận gốc (X), quá trình phân rã ổn định hơn.
     \item Ma trận X được SVD phân rã thành $X = U S V^T$. Với $U(N \times N)$: có cột là eigenvectors của $XX^T$. $V(D \times D)$: có cột là eigenvectors của $X^TX$. $S(N \times D)$: ma trận có đường chéo chính là singular values xếp từ lớn đến nhỏ. (\text{Singular Value là căn bậc 2 của eigenvalue})
 \end{itemize}
 
@@ -152,28 +151,12 @@ aei + bfg + cdh
 \textbf{PCA:}
 \begin{itemize}[leftmargin=*, nosep]
     \item $A = U D U^T = \sum_{i=1}^{r} \lambda_i u_i u_i^T$.
-    \item A: ma trận hiệp phương sai.
-    \item r: hạng của A.
-    \item Thu giảm chiều: Chỉ giữ lại M eigenvector và chiếu X lên các vector này.
+    \item \textbf{Với:} A: ma trận hiệp phương sai có hạng là r. Thu giảm chiều: Chỉ giữ lại M eigenvector và chiếu X lên các vector này.
 \end{itemize}
 
 \textbf{SVD:}
 \begin{itemize}[leftmargin=*, nosep]
     \item $A = U S V^T = \sum_{i=1}^{r} s_i u_i v_i^T$.
-    \item A: ma trận bất kỳ.
-    \item r: hạng của A.
-    \item Thu giảm chiều: Chỉ giữ lại M eigenvector và xấp xỉ X lên các vector này.
+    \item A: ma trận bất kỳ có hạng là r. Thu giảm chiều: Chỉ giữ lại M eigenvector và xấp xỉ X lên các vector này.
 \end{itemize}
-}
-\cheatbox{5. PCA qua API}{\textStrech}{
-\footnotesize
-\begin{enumerate}[leftmargin=*, nosep]
-    \item import numpy as np
-    \item from sklearn.decomposition import PCA
-    \item X = np.array([[-1, -1], [-2, -1], [-3, -2], [1, 1], [2, 1], [3, 2]])
-    \item pca = PCA(n\_components=2)
-    \item pca.fit(X)
-    \item print(pca.explained\_variance\_ratio\_)
-    \item print(pca.singular\_values\_)
-\end{enumerate}
 }

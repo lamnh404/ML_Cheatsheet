@@ -1,33 +1,11 @@
 \cheatbox{1. Giới thiệu về LDA}{\textStrech}{
 \footnotesize
-\textbf{1. Đầu vào:}
-\begin{itemize}[leftmargin=*, nosep]
-    \item X có kích thước $N \times D$, D rất lớn.
-    \item $t_k$ là nhãn lớp, có C lớp khác nhau.
-\end{itemize}
+\textbf{1. Đầu vào:} X có kích thước $N \times D$, D rất lớn. $t_k$ là nhãn lớp, có C lớp khác nhau.
 
-\textbf{2. Mục tiêu:}
-\begin{itemize}[leftmargin=*, nosep]
-    \item Giảm số chiều từ D xuống M và $M \leq C - 1$.
-    \item Dữ liệu sau khi giảm có tính phân tách cao nhất.
-\end{itemize}
+\textbf{2. Mục tiêu:} Giảm số chiều từ D xuống M $(M \leq C - 1)$ sao cho dữ liệu sau khi giảm có tính phân tách cao nhất.
 }
 
-\cheatbox{2. LDA qua API (Scikit-learn)}{\textStrech}{
-\footnotesize
-\begin{enumerate}
-    \item from sklearn import datasets
-    \item from sklearn.discriminant\_analysis import LinearDiscriminantAnalysis
-    \item iris = datasets.load\_iris()
-    \item X = iris.data
-    \item y = iris.target
-    \item target\_names = iris.target\_names
-    \item lda = LinearDiscriminantAnalysis(n\_components=2)
-    \item X\_r2 = lda.fit(X, y).transform(X)
-\end{enumerate}
-}
-
-\cheatbox{3. Bài toán tối ưu}{\textStrech}{
+\cheatbox{2. Bài toán tối ưu}{\textStrech}{
 \footnotesize
 \textbf{1. Các thành phần:}
 \begin{itemize}[leftmargin=*, nosep]
@@ -39,10 +17,12 @@
     \item Within-class covariance matrix của cả 2 lớp: $S_W = S_{W1} + S_{W2}$
     \item Within-class variance: $\sigma^2 = w^T S_W w$
 \end{itemize}
-
 \textbf{2. Hàm mục tiêu (Quan điểm của Fisher):}
-\\ Tìm hướng $w^* = \arg\max_w J(w)$ để cực đại hóa tỷ số:
-$$ \boxed{J(w) = \frac{w^T S_B w}{w^T S_W w}}$$
+\\ Tìm hướng $w^* = \arg\max_w J(w) \boxed{J(w) = \frac{w^T S_B w}{w^T S_W w}}$
+}
+
+\cheatbox{}{\textStrech}{
+\footnotesize
 
 \textbf{3. Tìm nghiệm:}
 \begin{itemize}[leftmargin=*, nosep]
@@ -53,7 +33,7 @@ $$ \boxed{J(w) = \frac{w^T S_B w}{w^T S_W w}}$$
 \end{itemize}
 }
 
-\cheatbox{4. Trường hợp có C lớp}{\textStrech}{
+\cheatbox{3. Trường hợp có C lớp}{\textStrech}{
 \footnotesize
 \textbf{1. Các thành phần:}
 \begin{itemize}[leftmargin=*, nosep]
@@ -89,9 +69,7 @@ Tìm ma trận chiếu $W$ để tối đa hóa tỷ số định thức:
 \textbf{4. Cách lựa chọn số chiều M:}
 \begin{itemize}[leftmargin=*, nosep]
     \item Khi có C lớp, M lớn nhất là C-1 vì hạng $S_B$ tối đa là C-1.
-    \item \textbf{Vì:} Ma trận $S_B$ là tổng có trọng số của C ma trận có hạng là 1.
-    \item Bất kỳ $m_k$ nào cũng có thể tính qua C-1 vector $m_k$ còn lại.
-    \item và $N_k = N - \sum_{i = 1}^{C|i\neq k} N_i$.
+    \item \textbf{Vì:} Ma trận $S_B$ là tổng có trọng số của C ma trận có hạng là 1. Bất kỳ $m_k$ nào cũng có thể tính qua C-1 vector $m_k$ còn lại, và $N_k = N - \sum_{i = 1}^{C|i\neq k} N_i$.
 \end{itemize}
 
 \textbf{5. Giải thuật:}

@@ -5,7 +5,10 @@
     \item \textbf{Học là tìm kiếm:} Tìm giả thuyết tốt nhất trong không gian giả thuyết thông qua các thế hệ.
     \item Thế hệ giả thuyết tiếp theo được tạo ra từ đột biến và lai ghép các giả thuyết tốt của thế hệ hiện tại.
 \end{itemize}
+}
 
+\cheatbox{}{\textStrech}{
+\footnotesize
 \textbf{2. Ưu điểm:}
 \begin{itemize}[leftmargin=*, nosep]
     \item Phương pháp bền vững (robust) để thích nghi.
@@ -38,19 +41,10 @@
 \textbf{2. Lai ghép (Crossover):}
 \begin{itemize}[leftmargin=*, nosep]
     \item Chọn $(r/2)p$ cặp giả thuyết từ $P$ dựa theo $Pr(h)$.
-    \item Với mỗi cặp $(h_1, h_2)$, áp dụng toán tử lai ghép để tạo 2 cá thể con.
-    \item Thêm tất cả con vào thế hệ mới.
+    \item Với mỗi cặp $(h_1, h_2)$, áp dụng toán tử lai ghép để tạo 2 cá thể con. Sau đó thêm tất cả con vào thế hệ mới.
 \end{itemize}
-}
 
-\cheatbox{}{\textStrech}{
-\footnotesize
-
-\textbf{3. Đột biến (Mutation):}
-\begin{itemize}[leftmargin=*, nosep]
-    \item Chọn ngẫu nhiên $m\%$ các giả thuyết vừa thêm vào với phân phối đều.
-    \item Với mỗi giả thuyết, đảo ngược (invert) 1 bit ngẫu nhiên trong biểu diễn của nó.
-\end{itemize}
+\textbf{3. Đột biến (Mutation):} Chọn ngẫu nhiên $m\%$ các giả thuyết vừa thêm vào với phân phối đều. Với mỗi giả thuyết, đảo ngược 1 bit ngẫu nhiên trong biểu diễn của nó.
 }
 
 \cheatbox{3. Biểu diễn Giả thuyết}{\textStrech}{
@@ -58,61 +52,31 @@
 \textbf{1. Biểu diễn Luật phân loại (Classification Rule):}
 \begin{itemize}[leftmargin=*, nosep]
     \item Dạng bit string: IF expr(A1)$\land$...$\land$expr(An) THEN C = c.
-    \item Mã hóa thành chuỗi bit (Bit string).
-    \item Độ dài chuỗi bit phụ thuộc vào số lượng thuộc tính và số giá trị có thể có của chúng.
+    \item Mã hóa thành chuỗi bit. Độ dài chuỗi bit phụ thuộc vào số lượng thuộc tính và số giá trị có thể có của chúng.
 \end{itemize}
 
-\textbf{2. Ví dụ Mã hóa (Example):}
-\begin{itemize}[leftmargin=*, nosep]
-    \item Thuộc tính \textit{Wind} (Strong, Weak) $\to$ 2 bit.
-    \item \texttt{Wind = Strong} $\to$ \texttt{10}; \texttt{Wind = Weak} $\to$ \texttt{01}; Không quan tâm $\to$ \texttt{11}.
-    \item Chuỗi đầy đủ ghép các thuộc tính: \texttt{Outlook | Wind | PlayTennis}.
-    \item Ví dụ: \texttt{111} (Outlook) \texttt{10} (Strong) \texttt{10} (Yes) $\to$ \texttt{1111010}.
-\end{itemize}
+\textbf{2. Ví dụ Mã hóa:} Thuộc tính \underline{Wind} (Strong, Weak) = 2 bit (Strong=10; Weak=01; Không quan tâm=11). Chuỗi đầy đủ ghép các thuộc tính: (Outlook | Wind | PlayTennis) là 3 bit | 2 bit | 2 bit = 111|10|10 = 11110110.
 
 \textbf{3. Hàm Fitness:}
-$Fitness(h) = (correct(h))^2$ Với $correct(h)$ là phần trăm số điểm dữ liệu phân loại đúng bởi giả thuyết $h$.
+$Fitness(h) = (correct(h))^2$. Với $correct(h)$ là phần trăm số điểm dữ liệu phân loại đúng bởi giả thuyết $h$.
 }
 
 \cheatbox{4. Các Toán tử Lai ghép Chi tiết}{\textStrech}{
 \footnotesize
-\textbf{1. Lai ghép một điểm (Single-point):}
-\begin{itemize}[leftmargin=*, nosep]
-    \item Chọn 1 điểm cắt ngẫu nhiên trên chuỗi.
-    \item Tráo đổi phần đuôi của 2 cha mẹ cho nhau.
-    \item Ví dụ: \underline{010|00} và 111|11 $\to$ \underline{010}|11 và 111|\underline{00}.
-\end{itemize}
+\textbf{1. Lai ghép một điểm:} Chọn 1 điểm cắt ngẫu nhiên trên chuỗi sau đó tráo đổi phần đuôi của 2 cha mẹ cho nhau. Ví dụ: \underline{010|00} và 111|11 $\to$ \underline{010}|11 và 111|\underline{00}.
 
-\textbf{2. Lai ghép hai điểm (Two-point):}
-\begin{itemize}[leftmargin=*, nosep]
-    \item Chọn 2 điểm cắt.
-    \item Tráo đổi đoạn giữa 2 điểm cắt đó.
-    \item Ví dụ : \underline{01|00|10} và 11|11|01 $\to$ \underline{01}|11|\underline{10} và 11|\underline{00}|01.
-\end{itemize}
+\textbf{2. Lai ghép 2 điểm:} Chọn 2 điểm cắt sau đó tráo đổi đoạn giữa 2 điểm cắt đó. \underline{01|00|10} và 11|11|01 tạo \underline{01}|11|\underline{10} và 11|\underline{00}|01.
 
-\textbf{3. Lai ghép đồng nhất (Uniform):}
-\begin{itemize}[leftmargin=*, nosep]
-    \item Xét từng vị trí bit.
-    \item Bit của con được chọn từ cha hoặc mẹ với xác suất như nhau.
-    \item Ví dụ: \underline{1}11\underline{01}0\underline{0}1 và 0\underline{00}01\underline{0}1\underline{0} $\to$ \underline{10001000} và 01110110.
-\end{itemize}
+\textbf{3. Lai ghép đồng nhất:} Xét từng vị trí bit. Bit của con được chọn từ cha hoặc mẹ với xác suất như nhau. Ví dụ: \underline{1}11\underline{01}0\underline{0}1 và 0\underline{00}01\underline{0}1\underline{0} $\to$ \underline{10001000} và 01110110.
 
-\textbf{4. Chuỗi bit độ dài thay đổi (Variable-length):}
-\begin{itemize}[leftmargin=*, nosep]
-    \item Áp dụng khi giả thuyết có số lượng luật khác nhau hoặc cấu trúc động.
-    \item Cần căn chỉnh các đoạn gen tương ứng (ví dụ: $A_1, A_2, C$) trước khi lai ghép để đảm bảo tính hợp lệ của con sinh ra.
-    \item Ví dụ: \underline{A1|A2|C} và A1|\underline{C|A2} $\to$ \underline{A1|A2|A2} và A1|\underline{C|C}.
-\end{itemize}
+\textbf{4. Chuỗi bit độ dài thay đổi:} Áp dụng khi giả thuyết có số lượng luật khác nhau hoặc cấu trúc động. Cần căn chỉnh các đoạn gen tương ứng (ví dụ: $A_1, A_2, C$) trước khi lai ghép để đảm bảo tính hợp lệ của con sinh ra. Ví dụ: \underline{A1|A2|C|A1|A2|C} và A1|A2|C|A1|A2|C $\to$ \underline{A1|A2|C|A1|A2}|C|A1|A2|\underline{C} và A1|A2|C.
 }
 
 % Ensemble Learning
 
 \cheatbox{1. Tổng quan Ensemble Learning}{\textStrech}{
 \footnotesize
-\textbf{1. Định nghĩa:}
-\begin{itemize}[leftmargin=*, nosep]
-    \item Ensemble Learning là phương pháp kết hợp nhiều mô hình học máy để tạo ra một mô hình dự đoán tốt hơn.
-\end{itemize}
+\textbf{1. Định nghĩa:} Ensemble Learning là phương pháp kết hợp nhiều mô hình học máy để tạo ra một mô hình dự đoán tốt hơn.
 
 \textbf{2. Các hướng tiếp cận chính:}
 \begin{itemize}[leftmargin=*, nosep]
@@ -127,11 +91,7 @@ $Fitness(h) = (correct(h))^2$ Với $correct(h)$ là phần trăm số điểm d
 \textbf{1. Bootstrap Data Sets:}
 Từ tập dữ liệu gốc $X$ ($N$ mẫu), tạo ra tập $X_B$ bằng cách lấy mẫu ngẫu nhiên $N$ lần \textbf{có hoàn lại} sao cho một số điểm có thể lặp lại trong $X_B$, một số có thể vắng mặt.
 
-\textbf{2. Quy trình Huấn luyện:}
-\begin{itemize}[leftmargin=*, nosep]
-    \item Tạo $M$ tập dữ liệu bootstrap khác nhau.
-    \item Huấn luyện mô hình trên mỗi tập dữ liệu để có $M$ mô hình cơ sở $y_m(x)$ cho dataset m.
-\end{itemize}
+\textbf{2. Quy trình Huấn luyện:} Tạo $M$ tập dữ liệu bootstrap khác nhau, sau đó huấn luyện mô hình trên mỗi tập dữ liệu để có $M$ mô hình cơ sở $y_m(x)$ cho dataset m.
 
 \textbf{3. Kết hợp (Committee Prediction):}
 \begin{itemize}[leftmargin=*, nosep]
@@ -144,18 +104,13 @@ Từ tập dữ liệu gốc $X$ ($N$ mẫu), tạo ra tập $X_B$ bằng cách 
 
 \cheatbox{3. Boosting (AdaBoost)}{\textStrech}{
 \footnotesize
-\textbf{1. Nguyên lý:}
-\begin{itemize}[leftmargin=*, nosep]
-    \item Huấn luyện tuần tự nhiều mô hình cơ sở.
-    \item Mỗi mô hình tập trung weight cao hơn vào các điểm dữ liệu mà các mô hình trước đó phân loại sai.
-    \item Kết quả cuối cùng là sự bầu chọn đa số có trọng số của tất cả mô hình cơ sở.
-\end{itemize}
+\textbf{1. Nguyên lý:} Huấn luyện tuần tự nhiều mô hình cơ sở. Mỗi mô hình tập trung weight cao hơn vào các điểm dữ liệu mà các mô hình trước đó phân loại sai. Kết quả cuối cùng là sự bầu chọn đa số có trọng số của tất cả mô hình cơ sở.
 
 \textbf{2. Thuật toán AdaBoost (Chi tiết):}
 \begin{itemize}[leftmargin=*, nosep]
     \item B1. Khởi tạo: Trọng số $w_n^{(1)} = 1/N$ cho mỗi điểm dữ liệu.
     \item B2. Lặp $m = 1 \dots M$:
-    \begin{itemize}[nosep]
+    \begin{itemize}[leftmargin=*, nosep]
         \item Huấn luyện $y_m(x)$ cực tiểu hóa lỗi có trọng số $J_m = \sum_{n=1}^{N} w_n^{(m)} I(y_m(x_n) \ne t_n)$.
         \item Tính tỉ lệ lỗi: $\epsilon_m = \frac{\sum_{n=1}^{N} w_n^{(m)} I(y_m(x_n) \ne t_n)}{\sum_{n=1}^{N} w_n^{(m)}}$.
         \item Tính hệ số tín nhiệm: $\alpha_m = \ln \left( \frac{1-\epsilon_m}{\epsilon_m} \right)$.
@@ -172,7 +127,7 @@ Từ tập dữ liệu gốc $X$ ($N$ mẫu), tạo ra tập $X_B$ bằng cách 
 \begin{itemize}[leftmargin=*, nosep]
     \item Đưa ra kết quả chỉ khi quá nửa số mô hình cơ sở đồng ý.
     \item Xác suất ensemble chọn kết quả đúng là phân phối nhị thức: $\sum_{k= T/2+1}^{T} \binom{T}{k} p^k (1-p)^{T-k}$ với $p$ là xác suất mô hình cơ sở đúng và $T$ là số mô hình cơ sở.
-    \item Nếu p > 0.5, xác suất này tăng dần về 1 khi T tăng đến vô cùng
+    \item Nếu p > 0.5, xác suất này tăng dần về 1 khi T tăng đến $\infty$.
 \end{itemize}
 }
 
