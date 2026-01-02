@@ -1,20 +1,4 @@
-\cheatbox{1. Giới thiệu \& Mục tiêu PCA}{\textStrech}{
-\footnotesize
-\textbf{1. Đầu vào:}
-\begin{itemize}[leftmargin=*, nosep]
-    \item Ma trận dữ liệu $X$ có kích thước ${N \times D}$ ($N$ mẫu, $D$ chiều). Thường $D$ rất lớn.
-    \item Độ phức tạp tính toán tăng lên: ma trận Kgram, kernel, hiệp phương sai, khoảng cách giữa các điểm dữ liệu, số nơron lớp ẩn tăng. Và cần mô hình phức tạp hơn, điểm dữ liệu lớn hơn dễ gây overfit.
-\end{itemize}
-
-\textbf{2. Mục tiêu:}
-\begin{itemize}[leftmargin=*, nosep]
-    \item Giảm số chiều $D \to M$ sao cho $M \ll D$.
-    \item Đặc trưng mới không tương quan (uncorrelated).
-    \item Giữ lại thông tin quan trọng nhất (Variance lớn nhất).
-\end{itemize}
-}
-
-\cheatbox{2. Kiến thức Toán nền tảng}{\textStrech}{
+\cheatbox{1. Kiến thức Toán nền tảng}{\textStrech}{
 \footnotesize
 \textbf{1. Hình chiếu:}
 Chiếu vector $x$ lên vector $u$: $l = \frac{u^T x}{\|u\|}$.
@@ -43,13 +27,28 @@ Giải 3.8 để tìm $\lambda_i$ (có tối đa $N$ eigenvalues), thay vào 3.7
 \end{itemize}
 }
 
+\cheatbox{2. Giới thiệu \& Mục tiêu PCA}{\textStrech}{
+\footnotesize
+\textbf{1. Đầu vào:}
+\begin{itemize}[leftmargin=*, nosep]
+    \item Ma trận dữ liệu $X (N \times D)$ ($N$ mẫu, $D$ chiều). Thường $D$ rất lớn.
+    \item Độ phức tạp tính toán tăng lên: ma trận Kgram, kernel, hiệp phương sai, khoảng cách giữa các điểm dữ liệu, số nơron lớp ẩn tăng. Và cần mô hình phức tạp hơn, điểm dữ liệu lớn hơn dễ gây overfit.
+\end{itemize}
+
+\textbf{2. Mục tiêu:}
+\begin{itemize}[leftmargin=*, nosep]
+    \item Giảm số chiều $D \to M$ sao cho $M \ll D$.
+    \item Đặc trưng mới không tương quan (uncorrelated).
+    \item Giữ lại thông tin quan trọng nhất (Variance lớn nhất).
+\end{itemize}
+}
+
 \cheatbox{3. Bài toán PCA}{\textStrech}{
 \footnotesize
 \textbf{1. Hai quan điểm về PCA:}
 \begin{itemize}[leftmargin=*, nosep]
-    \item PCA chuyển dữ liệu đầu vào là N điểm thuộc D chiều sang không gian con có kích thước M chiều (M < D) sao cho:
-    \item Khi chiếu dữ liệu lên không gian con này, phương sai của dữ liệu là lớn nhất: $argmax_u \frac{1}{N} \sum_{k=1}^N x^2_{u,k}$
-    \item Hoặc khi chiếu dữ liệu lên không gian con này, khoảng cách từ điểm dữ liệu đến không gian con là nhỏ nhất: $argmin_u \sum_{k=1}^N d^2_{u,k}$
+    \item Khi chiếu dữ liệu lên không gian con, phương sai của dữ liệu là lớn nhất: $argmax_u \frac{1}{N} \sum_{k=1}^N x^2_{u,k}$
+    \item Hoặc khi chiếu dữ liệu lên không gian con, khoảng cách từ điểm dữ liệu đến không gian con là nhỏ nhất: $argmin_u \sum_{k=1}^N d^2_{u,k}$
 \end{itemize}
 
 \textbf{2. Cực đại hóa phương sai:}

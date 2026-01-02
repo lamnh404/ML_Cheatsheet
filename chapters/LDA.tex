@@ -55,33 +55,51 @@ $$ \boxed{J(w) = \frac{w^T S_B w}{w^T S_W w}}$$
 
 \cheatbox{4. Trường hợp có C lớp}{\textStrech}{
 \footnotesize
-====== Phần này chưa làm xong ====== \\
-\textbf{1. Thiết lập tham số:}
+\textbf{1. Các thành phần:}
 \begin{itemize}[leftmargin=*, nosep]
-    \item Số lớp: $C$ ($C > 2$).
-    \item Vector trung bình lớp $k$: $m_k$.
-    \item Vector trung bình toàn cục: $m = \frac{1}{N} \sum_{k=1}^C N_k m_k$.
+    \item Danh sách các vector cần tìm: $w_1, w_2, \dots, w_M$.
+    \item Ma trận W (DxM) chứa các vector: $W = [w_1, w_2, \dots, w_M]$.
+    \item Between-class var: $trace(W^T S_B W) = \sum_{m=1}^{M} w_m^T S_B w_m$.
+    \item Within-class var: $trace(W^T S_W W) = \sum_{m=1}^{M} w_m^T S_W w_m$.
 \end{itemize}
 
-\textbf{2. Xây dựng các Ma trận Scatter:}
+\textbf{2. Hàm mục tiêu và tìm nghiệm:}
 \begin{itemize}[leftmargin=*, nosep]
-    \item \textbf{Within-class ($S_W$):} Tổng độ phân tán trong từng lớp.
-    $$ S_W = \sum_{k=1}^{C} S_k $$
-    (với $S_k$ là ma trận scatter của lớp $k$).
-
-    \item \textbf{Between-class ($S_B$):} Độ phân tán của các tâm lớp so với tâm chung.
-    $$ S_B = \sum_{k=1}^{C} N_k (m_k - m)(m_k - m)^T $$
+    \item Hàm mục tiêu: $J(W) = \frac{trace(W^T S_B W)}{trace(W^T S_W W)}$.
+    \item Mục tiêu: $W^* = \argmax_W J(W)$.
+    \item Đạo hàm $\nabla_W J = 0 <=> S_B W = \lambda S_W W $.
+    \item PT eigenvector: $S_W^{-1} S_B W = \lambda W$.
+    \item Điều kiện để $S_W$ khả đảo: X phải có ít nhất D điểm độc lập tuyến tính và $N \geq D$.
+    \item M chiều tìm được là M eigenvector của $S_W^{-1} S_B$ ứng với M eigenvalue lớn nhất.
 \end{itemize}
+}
 
-\textbf{3. Hàm mục tiêu (Objective Function):}
+\cheatbox{}{\textStrech}{
+\footnotesize
+\textbf{3. Tính toán các ma trận:}
+\begin{itemize}[leftmargin=*, nosep]
+    \item Tâm của tất cả các điểm dữ liệu: $m = \frac{1}{N} \sum_{n=1}^{N} x_n = \frac{1}{N} \sum_{k=1}^{C} N_k m_k$
+    \item Between-class scatter matrix:
+    $ S_B = \sum_{k=1}^{C} N_k (m_k - m)(m_k - m)^T $
+    \item Within-class scatter matrix:
+    $ S_W = \sum_{k=1}^{C} \sum_{n \in C_k} (x_n - m_k)(x_n - m_k)^T $
+\end{itemize}
 Tìm ma trận chiếu $W$ để tối đa hóa tỷ số định thức:
-\vspace{-0.2cm}
-$$ \boxed{J(W) = \frac{\det(W^T S_B W)}{\det(W^T S_W W)}} $$
 
-\textbf{4. Giải pháp và Kết quả:}
+\textbf{4. Cách lựa chọn số chiều M:}
 \begin{itemize}[leftmargin=*, nosep]
-    \item Bài toán trị riêng: $S_B w_i = \lambda_i S_W w_i$ (hoặc $S_W^{-1} S_B w_i = \lambda_i w_i$).
-    \item $W$ được tạo thành từ các \textbf{eigenvectors} ứng với các \textbf{eigenvalues} lớn nhất.
-    \item \textbf{Số chiều tối đa:} $K \le C - 1$ (vì hạng của $S_B$ tối đa là $C-1$).
+    \item Khi có C lớp, M lớn nhất là C-1 vì hạng $S_B$ tối đa là C-1.
+    \item \textbf{Vì:} Ma trận $S_B$ là tổng có trọng số của C ma trận có hạng là 1.
+    \item Bất kỳ $m_k$ nào cũng có thể tính qua C-1 vector $m_k$ còn lại.
+    \item và $N_k = N - \sum_{i = 1}^{C|i\neq k} N_i$.
+\end{itemize}
+
+\textbf{5. Giải thuật:}
+\begin{itemize}[leftmargin=*, nosep]
+    \item Tính $S_B$ và $S_W$.
+    \item Tính $A = S_W^{-1} S_B$.
+    \item Sử dụng SVD để tìm ra M, M < C - 1, vector $w_m$ với m = 1, 2, \dots, M.
+    \item Tính $Z = X - m^T$ (cần broadcast) với m là total mean = $\frac{1}{N} \sum_{n=1}^N x_n$.
+    \item Dữ liệu sau khi thu giảm chiều: $\hat{X} = Z W$ với W chứa M vector $w_m$.
 \end{itemize}
 }
