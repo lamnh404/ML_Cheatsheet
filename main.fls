@@ -329,11 +329,20 @@ INPUT C:\Users\Asus TUF\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbx5.
 INPUT C:\Users\Asus TUF\AppData\Local\Programs\MiKTeX\fonts\tfm\vntex\vnr\vnr7.tfm
 INPUT C:\Users\Asus TUF\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbx7.tfm
 INPUT C:\Users\Asus TUF\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbx10.tfm
+INPUT .\chapters\DeepLearning.tex
+INPUT .\chapters\DeepLearning.tex
+INPUT chapters\DeepLearning.tex
+INPUT C:\Users\Asus TUF\AppData\Local\Programs\MiKTeX\fonts\tfm\vntex\vnr\vnbx6.tfm
+INPUT C:\Users\Asus TUF\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\tcrm0600.tfm
 OUTPUT main.pdf
 INPUT C:\Users\Asus TUF\AppData\Local\MiKTeX\fonts\map\pdftex\pdftex.map
 INPUT main.aux
+INPUT C:\Users\Asus TUF\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\tcrm0600.pk
+INPUT C:\Users\Asus TUF\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\tcrm0600.pk
 INPUT C:\Users\Asus TUF\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\tcrm0800.pk
 INPUT C:\Users\Asus TUF\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\tcrm0800.pk
+INPUT C:\Users\Asus TUF\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmbx6.pfb
+INPUT C:\Users\Asus TUF\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmbx6.pfb
 INPUT C:\Users\Asus TUF\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmbx7.pfb
 INPUT C:\Users\Asus TUF\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmbx7.pfb
 INPUT C:\Users\Asus TUF\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmbx8.pfb
@@ -368,10 +377,14 @@ INPUT C:\Users\Asus TUF\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfont
 INPUT C:\Users\Asus TUF\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy8.pfb
 INPUT C:\Users\Asus TUF\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\symbols\msbm10.pfb
 INPUT C:\Users\Asus TUF\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\symbols\msbm10.pfb
+INPUT C:\Users\Asus TUF\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\symbols\msbm7.pfb
+INPUT C:\Users\Asus TUF\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\symbols\msbm7.pfb
 INPUT C:\Users\Asus TUF\AppData\Local\Programs\MiKTeX\fonts\type1\vntex\vnr\vnbx12.pfb
 INPUT C:\Users\Asus TUF\AppData\Local\Programs\MiKTeX\fonts\type1\vntex\vnr\vnbx12.pfb
 INPUT C:\Users\Asus TUF\AppData\Local\Programs\MiKTeX\fonts\type1\vntex\vnr\vnbx5.pfb
 INPUT C:\Users\Asus TUF\AppData\Local\Programs\MiKTeX\fonts\type1\vntex\vnr\vnbx5.pfb
+INPUT C:\Users\Asus TUF\AppData\Local\Programs\MiKTeX\fonts\type1\vntex\vnr\vnbx6.pfb
+INPUT C:\Users\Asus TUF\AppData\Local\Programs\MiKTeX\fonts\type1\vntex\vnr\vnbx6.pfb
 INPUT C:\Users\Asus TUF\AppData\Local\Programs\MiKTeX\fonts\type1\vntex\vnr\vnbx8.pfb
 INPUT C:\Users\Asus TUF\AppData\Local\Programs\MiKTeX\fonts\type1\vntex\vnr\vnbx8.pfb
 INPUT C:\Users\Asus TUF\AppData\Local\Programs\MiKTeX\fonts\type1\vntex\vnr\vnr10.pfb

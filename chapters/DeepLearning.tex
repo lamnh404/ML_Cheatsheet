@@ -1,0 +1,157 @@
+\cheatbox{Deep Learning}{\textStrech}
+{
+\setlength{\abovedisplayskip}{1pt}
+\setlength{\belowdisplayskip}{1pt}
+\setlength{\abovedisplayshortskip}{0pt}
+\setlength{\belowdisplayshortskip}{0pt}
+\setlength{\itemsep}{0pt}
+\setlength{\parskip}{0pt}
+
+\textbf{Goal:} Multiclass classification ($y \in \{1,\dots,K\}$).
+
+\textbf{Model (Softmax):}
+\vspace{-2pt}
+\[
+p_{ik} = \frac{\exp(\mathbf{w}_k^\top \mathbf{x}_i + b_k)}
+{\sum_{j=1}^{K} \exp(\mathbf{w}_j^\top \mathbf{x}_i + b_j)}
+\]
+\vspace{-4pt}
+
+\textbf{Loss (Categorical Cross-Entropy):}
+\vspace{-2pt}
+\[
+\mathcal{L}_{\text{CE}}
+= -\frac{1}{n} \sum_{i=1}^{n} \sum_{k=1}^{K} y_{ik} \log p_{ik}
+= -\frac{1}{n} \sum_{i=1}^{n} \log p_{i,y_i}
+\]
+\vspace{-4pt}
+
+\textbf{Prediction:}
+\vspace{-2pt}
+\[
+\hat{y}_i = \arg\max_k p_{ik}
+\]
+\vspace{-4pt}
+
+\textbf{Notes:}
+\begin{itemize}
+  \item $y_{ik} \in \{0,1\}$: nhãn one-hot của mẫu $i$ tại lớp $k$
+  \item $p_{i,y_i}$: xác suất dự đoán của lớp đúng của mẫu $i$
+\end{itemize}
+\vspace{-2pt}
+
+\textbf{Vectorized form:}
+\begin{itemize}
+  \item \textbf{Vector (single sample):}
+  for $\mathbf{x} \in \mathbb{R}^{N}$,
+  $\mathbf{W} \in \mathbb{R}^{M \times N}$,
+  $\mathbf{b} \in \mathbb{R}^{M}$
+  \vspace{-2pt}
+  \[
+  \mathbf{y} = \mathbf{W}\mathbf{x} + \mathbf{b}
+  \in \mathbb{R}^{M}
+  \]
+  \vspace{-4pt}
+
+  \item \textbf{Matrix (mini-batch):}
+  for $\mathbf{X} \in \mathbb{R}^{B \times N}$
+  (rows are samples)
+  \vspace{-2pt}
+  \[
+  \mathbf{Y} = \mathbf{X}\mathbf{W}^{\top}
+  + \mathbf{1}\mathbf{b}^{\top}
+  \in \mathbb{R}^{B \times M}
+  (\text{ broadcast } \mathbf{b} \text{ to all rows} )
+  \]
+\end{itemize}
+\vspace{-4pt}
+
+\textbf{Activation functions:}
+
+\textbf{Sigmoid}
+\vspace{-2pt}
+\[
+\sigma(x) = \frac{1}{1 + e^{-x}},
+\qquad
+\sigma'(x) = \sigma(x)\bigl(1 - \sigma(x)\bigr)
+\]
+\vspace{-4pt}
+
+\textbf{Tanh}
+\vspace{-2pt}
+\[
+\tanh(x) = \frac{e^{x} - e^{-x}}{e^{x} + e^{-x}},
+\qquad
+\tanh'(x) = 1 - \tanh^2(x)
+\]
+\vspace{-4pt}
+
+\textbf{ReLU}
+\vspace{-2pt}
+\[
+\mathrm{ReLU}(x) = \max(0, x),
+\qquad
+\mathrm{ReLU}'(x) =
+\begin{cases}
+1, & x > 0 \\
+0, & x \le 0
+\end{cases}
+\]
+\vspace{-4pt}
+
+\textbf{Leaky ReLU}
+\vspace{-2pt}
+\[
+\mathrm{LReLU}(x) =
+\begin{cases}
+x, & x > 0 \\
+\alpha x, & x \le 0
+\end{cases},
+\qquad
+\mathrm{LReLU}'(x) =
+\begin{cases}
+1, & x > 0 \\
+\alpha, & x \le  0
+\end{cases}
+\]
+\vspace{-4pt}
+
+\textbf{SiLU (Swish)}
+\vspace{-2pt}
+\[
+\mathrm{SiLU}(x) = x\,\sigma(x),
+\qquad
+\mathrm{SiLU}'(x) = \sigma(x) + x\,\sigma(x)\bigl(1 - \sigma(x)\bigr)
+\]
+\textbf{Linear Regression Solution:}
+
+\textbf{Model:}
+\vspace{-2pt}
+\[
+\hat{y} = \mathbf{w}^\top \mathbf{x} + b
+\]
+\vspace{-4pt}
+
+\textbf{Loss (MSE):}
+\vspace{-2pt}
+\[
+\mathcal{L} = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2
+= \frac{1}{n} \|\mathbf{y} - \mathbf{X}\mathbf{w}\|^2
+\]
+\vspace{-4pt}
+
+\textbf{Closed-form Solution (Normal Equation):}
+\vspace{-2pt}
+\[
+\mathbf{w}^* = (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{y}
+\]
+\vspace{-4pt}
+
+\textbf{With regularization (Ridge):}
+\vspace{-2pt}
+\[
+\mathbf{w}^* = (\mathbf{X}^\top \mathbf{X} + \lambda \mathbf{I})^{-1} \mathbf{X}^\top \mathbf{y}
+\]
+\vspace{-4pt}
+
+}
