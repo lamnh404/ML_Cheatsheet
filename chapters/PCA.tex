@@ -142,7 +142,7 @@ aei + bfg + cdh
 \begin{itemize}[leftmargin=*]
     \item Tính $Z = X - m^T$ với m là total mean = $\frac{1}{N} \sum_{n=1}^N x_n$.
     \item Dùng SVD phân rã $Z = U S V^T$ (numpy.linalg.svd).
-    \item Chọn M vectors đầu tiên của V tương ứng M singular values lớn nhất tạo $\hat{V}$.
+    \item Chọn M vectors đầu tiên của V tương ứng M singular values lớn nhất tạo $\hat{V}$. (\text{Singular Value là căn bậc 2 của eigenvalue})
     \item Chiếu dữ liệu Z lên M eigenvectors: $X_{pca} = Z \hat{V}$.
 \end{itemize}
 
